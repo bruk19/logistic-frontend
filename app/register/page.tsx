@@ -69,7 +69,6 @@ function Register() {
     }
   }
 
-
   return (
     <div>
       <div>
@@ -97,6 +96,30 @@ function Register() {
         <button 
         onClick={addRMS}>
           Register RMS
+        </button>
+      </div>
+      <div>
+        <input 
+        type='text'
+        placeholder=''
+        value={nameMAN}
+        onChange={(e) => setNameMAN(e.target.value)}
+        />
+        <input 
+        type='text'
+        placeholder='Address'
+        value={addressMAN}
+        onChange={(e) => setAddressMAN(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='Place'
+        value={placeMAN}
+        onChange={(e) => setPlaceMAN(e.target.value)}
+        />
+        <button
+        onClick={addMAN}>
+          register Manufacture
         </button>
       </div>
     </div>
