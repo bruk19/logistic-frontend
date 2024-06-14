@@ -12,6 +12,9 @@ function Register() {
   const [nameRMS, setNameRMS] = useState<string>('');
   const [addressRMS, setAddressRMS] = useState<string>('');
   const [placeRMS, setPlaceRMS] = useState<string>('');
+  const [nameMAN, setNameMAN] = useState<string>('');
+  const [addressMAN, setAddressMAN] = useState<string>('');
+  const [placeMAN, setPlaceMAN] = useState<string>('');
 
    useEffect(() => {
     async function initialize() {
@@ -51,6 +54,22 @@ function Register() {
       }
     }
   }
+
+  const addMAN = async () => {
+    if(contract && window.ethereum !== undefined) {
+      try {
+        const tx = await contract.addMAN(nameMAN, addressMAN, placeMAN);
+        const receipt = await tx.wait()
+        console.log("Manufacutred Registered. Transction receipt:", receipt);
+        window.alert("Manufacutre registred successfully");
+      }
+      catch (error) {
+        console.log("Error on registering manufacture")
+      }
+    }
+  }
+
+
   return (
     <div>
       <div>
