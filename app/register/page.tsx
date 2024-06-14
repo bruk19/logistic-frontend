@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3';
 import { ethers } from 'ethers';
@@ -8,9 +9,9 @@ function Register() {
     undefined
   );
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
-  const [name, setName] = useState<string | null>(null);
-  const [address, setAddress] = useState<address| null>(null);
-  const [place, setPlace] = useState<string | null>(null);
+  const [nameRMS, setNameRMS] = useState<string>('');
+  const [addressRMS, setAddressRMS] = useState<string>('');
+  const [placeRMS, setPlaceRMS] = useState<string>('');
 
    useEffect(() => {
     async function initialize() {
@@ -37,21 +38,49 @@ function Register() {
   const addRMS = async () =>{
     if(contract && window.ethereum !== undefined) {
       try {
-        const tx = await contract.addRMS(name, address, place);
+        const tx = await contract.addRMS(nameRMS, addressRMS, placeRMS);
         const receipt = await tx.wait()
         console.log('Raw Material Supplier Registared. Transaction receipt:', receipt);
         window.alert("Raw Material Supplier registred successfully")
 
-      setName('');
-      setAddress('');
-      setPlace('')
+      setNameRMS('');
+      setAddressRMS('');
+      setPlaceRMS('')
       } catch (error) {
         console.log("Error on creating raw material supplier")
       }
     }
   }
   return (
-    <div>Register</div>
+    <div>
+      <div>
+        <h1 className="text-3xl mx-4 font-bold my-5 mb-4">registor</h1>
+      </div>
+      <div>
+        <input
+        type='text'
+        placeholder='Name'
+        value={nameRMS}
+        onChange={(e) => setNameRMS(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='Address'
+        value={addressRMS}
+        onChange={(e) => setAddressRMS(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='place'
+        value={placeRMS}
+        onChange={(e) => setPlaceRMS(e.target.value)}
+        />
+        <button 
+        onClick={addRMS}>
+          Register RMS
+        </button>
+      </div>
+    </div>
   )
 }
 
