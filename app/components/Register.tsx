@@ -8,6 +8,9 @@ function Register() {
     undefined
   );
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>(null);
+  const [address, setAddress] = useState<address| null>(null);
+  const [place, setPlace] = useState<string | null>(null);
 
    useEffect(() => {
     async function initialize() {
@@ -30,6 +33,23 @@ function Register() {
     }
     initialize();
   }, []);
+
+  const addRMS = async () =>{
+    if(contract && window.ethereum !== undefined) {
+      try {
+        const tx = await contract.addRMS(name, address, place);
+        const receipt = await tx.wait()
+        console.log('Raw Material Supplier Registared. Transaction receipt:', receipt);
+        window.alert("Raw Material Supplier registred successfully")
+
+      setName('');
+      setAddress('');
+      setPlace('')
+      } catch (error) {
+        console.log("Error on creating raw material supplier")
+      }
+    }
+  }
   return (
     <div>Register</div>
   )
