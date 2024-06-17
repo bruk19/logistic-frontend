@@ -76,6 +76,24 @@ function Register() {
     }
   }
 
+  const addDST = async () => {
+    if(contract && window.ethereum !== undefined) {
+      try {
+        const tx = await contract.addDST(nameDST, addressDST, placeDST);
+        const receipt = await tx.wait()
+        console.log("Distributor Registered. Transaction receipt:", receipt)
+        window.alert("Distributor registred successfully");
+
+        setNameDST('')
+        setAddressDST('')
+        setPlaceDST('')
+      }
+      catch (error) {
+        console.log("Error on registering manufacture")
+      }
+    }
+  }
+
 
   return (
     <div className='mx-8'>
