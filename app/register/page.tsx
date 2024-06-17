@@ -18,6 +18,9 @@ function Register() {
   const [nameDST, setNameDST] = useState<string>('');
   const [addressDST, setAddressDST] = useState<string>('');
   const [placeDST, setPlaceDST] = useState<string>('');
+  const [nameRTL, setNameRTL] = useState<string>('');
+  const [addressRTL, setAddressRTL] = useState<string>('');
+  const [placeRTL, setPlaceRTL] = useState<string>('');
 
    useEffect(() => {
     async function initialize() {
@@ -90,6 +93,24 @@ function Register() {
       }
       catch (error) {
         console.log("Error on registering manufacture")
+      }
+    }
+  }
+
+  const addRTL = async () => {
+    if(contract && window.ethereum !== undefined) {
+      try {
+        const tx = await contract.addRTL(nameRTL, addressRTL, placeRTL);
+        const receipt = await tx.wait()
+        console.log("Retailer Registered. Transaction receipt:", receipt)
+        window.alert("Distributor registred successfully")
+
+        setNameRTL('')
+        setAddressRTL('')
+        setPlaceRTL('')
+      }
+      catch (error) {
+        console.log("Error on resitering retailer")
       }
     }
   }
