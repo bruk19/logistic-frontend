@@ -94,7 +94,6 @@ function Register() {
     }
   }
 
-
   return (
     <div className='mx-8'>
       <div>
@@ -149,6 +148,29 @@ function Register() {
         onClick={addMAN}>
           register Manufacture
         </button>
+      </div>
+      <div>
+        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Redister Distributor (Only a Product on Manufacture stage can be registered.)</p>
+        <input
+        type='text'
+        placeholder='Name'
+        value={nameDST}
+        onChange={(e) => setNameDST(e.target.value)}
+        />
+        <input 
+        type="text"
+        placeholder='Address'
+        value={addressDST}
+        onChange={(e) => setAddressDST(e.target.value)}
+        />
+         <input 
+         type="text"
+         placeholder='Place'
+         value={placeDST}
+         onChange={(e) => setPlaceDST(e.target.value)}
+        />
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+         onClick={addMAN}>Register Distributor</button>
       </div>
     </div>
   )
