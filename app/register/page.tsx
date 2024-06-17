@@ -171,7 +171,7 @@ function Register() {
         </button>
       </div>
       <div>
-        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Redister Distributor (Only a Product on Manufacture stage can be registered.)</p>
+        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Distributor (Only a Product on Manufacture stage can be registered.)</p>
         <input
         type='text'
         placeholder='Name'
@@ -192,6 +192,29 @@ function Register() {
         />
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
          onClick={addMAN}>Register Distributor</button>
+      </div>
+      <div>
+        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Retailer (Only a Product on Distributor stage can be registered.)</p>
+        <input
+        type='text'
+        placeholder='Name'
+        value={nameRTL}
+        onChange ={(e) => setNameRTL(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='Name'
+        value={addressRTL}
+        onChange={(e) => setAddressRTL(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='Name'
+        value={placeRTL}
+        onChange = {(e) => setAddressRTL(e.target.value)}
+        />
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+        onClick ={addRTL}>Register Retailer</button>
       </div>
     </div>
   )
