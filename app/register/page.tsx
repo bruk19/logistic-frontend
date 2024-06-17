@@ -50,10 +50,15 @@ function Register() {
       const wallet = await signer.getAddress();
       setWalletAddress(wallet);
 
-      const storeRMSData = JSON.parse(localStorage.getItem('rmsData') || '[]');
-      const storeNextId = JSON.parse(localStorage.getItem('rmsData') || '[]');
-      setRmsData(storeRMSData);
-      setNextId(storeNextId);
+      // Retrieve rmsData from localStorage
+      const storedRMSData = localStorage.getItem('rmsData');
+      const parsedRMSData = storedRMSData ? JSON.parse(storedRMSData) : [];
+      setRmsData(parsedRMSData);
+
+      // Retrieve nextId from localStorage or use a default value
+      const storedNextId = localStorage.getItem('nextId');
+      const parsedNextId = storedNextId ? parseInt(storedNextId) : 1;
+      setNextId(parsedNextId);
     }
     initialize();
   }, []);
@@ -70,17 +75,17 @@ function Register() {
         window.alert('Raw Material Supplier registred successfully');
 
         const newRmsData = [
-        ...rmsData,
-        {
-          id: nextId,
-          name: nameRMS,
-          place: placeRMS,
-          addr: addressRMS,
-        },
-      ];
+          ...rmsData,
+          {
+            id: nextId,
+            name: nameRMS,
+            place: placeRMS,
+            addr: addressRMS,
+          },
+        ];
 
         setRmsData(newRmsData);
-        localStorage.setItem('rmsData', JSON.stringify(newRmsData))
+        localStorage.setItem('rmsData', JSON.stringify(newRmsData));
 
         setNextId((prevId) => prevId + 1);
         localStorage.setItem('nextID', JSON.stringify(nextId + 1));
@@ -181,9 +186,9 @@ function Register() {
         >
           Register RMS
         </button>
-        <table>
-          <thead>
-            <tr>
+        <table className="w-4/5 my-3">
+          <thead className="mt-10">
+            <tr className="bg-slate-50 gap-x-20">
               <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Place</th>
@@ -192,12 +197,14 @@ function Register() {
           </thead>
           <tbody>
             {rmsData.map((data) => (
-              <tr key={data.id}>
-                <td>{data.id}</td>
-                <td>{data.name}</td>
-                <td>{data.place}</td>
-                <td>{data.addr}</td>
-              </tr>
+              <>
+                <tr key={data.id} className="border-b border-gray-200 pb-4">
+                  <td>{data.id}</td>
+                  <td>{data.name}</td>
+                  <td>{data.place}</td>
+                  <td>{data.addr}</td>
+                </tr>
+              </>
             ))}
           </tbody>
         </table>
