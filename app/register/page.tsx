@@ -120,21 +120,24 @@ function Register() {
       <div>
         <h1 className="text-3xl mx-4 font-bold my-5 mb-4">registor</h1>
       </div>
-      <div>
+      <div className='mb-12'>
         <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Raw Material Supplier</p>
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Name'
         value={nameRMS}
         onChange={(e) => setNameRMS(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Address'
         value={addressRMS}
         onChange={(e) => setAddressRMS(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='place'
         value={placeRMS}
@@ -145,21 +148,24 @@ function Register() {
           Register RMS
         </button>
       </div>
-      <div>
+      <div className='mb-12'>
         <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Manufacture(Only a Product on Raw material supplier stage can be registered.)</p>
         <input 
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Name'
         value={nameMAN}
         onChange={(e) => setNameMAN(e.target.value)}
         />
         <input 
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Address'
         value={addressMAN}
         onChange={(e) => setAddressMAN(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Place'
         value={placeMAN}
@@ -170,21 +176,24 @@ function Register() {
           register Manufacture
         </button>
       </div>
-      <div>
+      <div className='mb-12'>
         <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Distributor (Only a Product on Manufacture stage can be registered.)</p>
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Name'
         value={nameDST}
         onChange={(e) => setNameDST(e.target.value)}
         />
         <input 
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type="text"
         placeholder='Address'
         value={addressDST}
         onChange={(e) => setAddressDST(e.target.value)}
         />
          <input 
+         className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
          type="text"
          placeholder='Place'
          value={placeDST}
@@ -193,23 +202,26 @@ function Register() {
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
          onClick={addMAN}>Register Distributor</button>
       </div>
-      <div>
+      <div className='mb-12'>
         <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Retailer (Only a Product on Distributor stage can be registered.)</p>
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1"
         type='text'
         placeholder='Name'
         value={nameRTL}
         onChange ={(e) => setNameRTL(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
-        placeholder='Name'
+        placeholder='Address'
         value={addressRTL}
         onChange={(e) => setAddressRTL(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
-        placeholder='Name'
+        placeholder='Place'
         value={placeRTL}
         onChange = {(e) => setAddressRTL(e.target.value)}
         />
