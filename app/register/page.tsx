@@ -29,6 +29,7 @@ function Register() {
   const [addressRTL, setAddressRTL] = useState<string>('');
   const [placeRTL, setPlaceRTL] = useState<string>('');
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
+  const [nextId, setNextId] = useState(1);
 
   useEffect(() => {
     async function initialize() {
@@ -48,6 +49,11 @@ function Register() {
 
       const wallet = await signer.getAddress();
       setWalletAddress(wallet);
+
+      const storeRMSData = JSON.parse(localStorage.getItem('rmsData') || '[]');
+      const storeNextId = JSON.parse(localStorage.getItem('rmsData') || '[]');
+      setRmsData(storeRMSData);
+      setNextId(storeNextId);
     }
     initialize();
   }, []);
@@ -63,15 +69,21 @@ function Register() {
         );
         window.alert('Raw Material Supplier registred successfully');
 
-        setRmsData((prevData) => [
-          ...prevData,
-          {
-            id: receipt.transactionHash, // You can use a more appropriate ID here
-            name: nameRMS,
-            place: placeRMS,
-            addr: addressRMS,
-          },
-        ]);
+        const newRmsData = [
+        ...rmsData,
+        {
+          id: nextId,
+          name: nameRMS,
+          place: placeRMS,
+          addr: addressRMS,
+        },
+      ];
+
+        setRmsData(newRmsData);
+        localStorage.setItem('rmsData', JSON.stringify(newRmsData))
+
+        setNextId((prevId) => prevId + 1);
+        localStorage.setItem('nextID', JSON.stringify(nextId + 1));
 
         setNameRMS('');
         setAddressRMS('');
@@ -179,16 +191,14 @@ function Register() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {rmsData.map((data) => (
-                <tr key={data.id}>
-                  <td>{data.id}</td>
-                  <td>{data.name}</td>
-                  <td>{data.place}</td>
-                  <td>{data.addr}</td>
-                </tr>
-              ))}
-            </tr>
+            {rmsData.map((data) => (
+              <tr key={data.id}>
+                <td>{data.id}</td>
+                <td>{data.name}</td>
+                <td>{data.place}</td>
+                <td>{data.addr}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -251,7 +261,7 @@ function Register() {
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={addMAN}
+          onClick={addDST}
         >
           Register Distributor
         </button>
