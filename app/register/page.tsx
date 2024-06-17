@@ -15,6 +15,9 @@ function Register() {
   const [nameMAN, setNameMAN] = useState<string>('');
   const [addressMAN, setAddressMAN] = useState<string>('');
   const [placeMAN, setPlaceMAN] = useState<string>('');
+  const [nameDST, setNameDST] = useState<string>('');
+  const [addressDST, setAddressDST] = useState<string>('');
+  const [placeDST, setPlaceDST] = useState<string>('');
 
    useEffect(() => {
     async function initialize() {
