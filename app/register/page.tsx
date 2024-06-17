@@ -62,6 +62,10 @@ function Register() {
         const receipt = await tx.wait()
         console.log("Manufacutred Registered. Transction receipt:", receipt);
         window.alert("Manufacutre registred successfully");
+
+        setNameMAN('')
+        setAddressMAN('')
+        setPlaceMAN('')
       }
       catch (error) {
         console.log("Error on registering manufacture")
@@ -69,12 +73,14 @@ function Register() {
     }
   }
 
+
   return (
-    <div>
+    <div className='mx-8'>
       <div>
         <h1 className="text-3xl mx-4 font-bold my-5 mb-4">registor</h1>
       </div>
       <div>
+        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Raw Material Supplier</p>
         <input
         type='text'
         placeholder='Name'
@@ -93,15 +99,16 @@ function Register() {
         value={placeRMS}
         onChange={(e) => setPlaceRMS(e.target.value)}
         />
-        <button 
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
         onClick={addRMS}>
           Register RMS
         </button>
       </div>
       <div>
+        <p className='flex justify-center bg-slate-100 py-2 px-auto text center my-3'>Register Manufacture(Only a Product on Raw material supplier stage can be registered.)</p>
         <input 
         type='text'
-        placeholder=''
+        placeholder='Name'
         value={nameMAN}
         onChange={(e) => setNameMAN(e.target.value)}
         />
@@ -117,7 +124,7 @@ function Register() {
         value={placeMAN}
         onChange={(e) => setPlaceMAN(e.target.value)}
         />
-        <button
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
         onClick={addMAN}>
           register Manufacture
         </button>
