@@ -4,12 +4,12 @@ import { getWeb3, setUpWeb3 } from '../web3';
 import { ethers } from 'ethers';
 import { abi, contractAddress } from '../constants/logestics';
 
-interface RMSData {
+type RMSData = {
   id: number;
   name: string;
-  place: string;
   addr: string;
-}
+  place: string;
+};
 
 function Register() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(
@@ -49,19 +49,37 @@ function Register() {
 
       const wallet = await signer.getAddress();
       setWalletAddress(wallet);
-
-      // Retrieve rmsData from localStorage
-      const storedRMSData = localStorage.getItem('rmsData');
-      const parsedRMSData = storedRMSData ? JSON.parse(storedRMSData) : [];
-      setRmsData(parsedRMSData);
-
-      // Retrieve nextId from localStorage or use a default value
-      const storedNextId = localStorage.getItem('nextId');
-      const parsedNextId = storedNextId ? parseInt(storedNextId) : 1;
-      setNextId(parsedNextId);
     }
     initialize();
   }, []);
+
+    useEffect(() => {
+    // Fetch the RMS data from the contract
+    const fetchRMSData = async () => {
+      try {
+        if (contract) {
+          const numRMS = await contract.getRMSCount();
+          const rmsData: RMSData[] = [];
+
+          for (let i = 0; i < numRMS; i++) {
+            const rms = await contract.RMS(i);
+            rmsData.push({
+              id: rms.id,
+              name: rms.name,
+              addr: rms._addr,
+              place: rms.place
+            });
+          }
+
+          setRmsData(rmsData);
+        }
+      } catch (error) {
+        console.error('Error fetching RMS data:', error);
+      }
+    };
+
+    fetchRMSData();
+  }, [contract]);
 
   const addRMS = async () => {
     if (contract && window.ethereum !== undefined) {
@@ -186,28 +204,29 @@ function Register() {
         >
           Register RMS
         </button>
-        <table className="w-4/5 my-3">
-          <thead className="mt-10">
-            <tr className="bg-slate-50 gap-x-20">
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Place</th>
-              <th scope="col">Ethereum Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rmsData.map((data) => (
-              <>
-                <tr key={data.id} className="border-b border-gray-200 pb-4">
-                  <td>{data.id}</td>
-                  <td>{data.name}</td>
-                  <td>{data.place}</td>
-                  <td>{data.addr}</td>
-                </tr>
-              </>
-            ))}
-          </tbody>
-        </table>
+        <div>
+        <table>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Place</th>
+          <th scope="col">Ethereum Address</th>
+        </tr>
+      </thead>
+      <tbody>
+       {rmsData.map((rms, index) => (
+      <tr key={index}>
+        <td>{rms.id}</td>
+        <td>{rms.name}</td>
+        <td>{rms.place}</td>
+        <td>{rms.addr}</td>
+      </tr>
+    ))}
+      </tbody>
+    </table>
+        </div>
+
       </div>
       <div className="mb-12">
         <p className="flex justify-center bg-slate-100 font-bold py-2 px-auto text center my-3">
