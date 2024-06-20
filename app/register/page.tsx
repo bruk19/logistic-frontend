@@ -85,6 +85,31 @@ function Register() {
     fetchRMSData();
   }, [contract]);
 
+  useEffect(() => {
+    const fetchMANData = async () => {
+    if (contract) {
+      try {
+        const totalManSupply = await contract.manuCount();
+        const allManSupply = [];
+        for (let i=1; i<= totalManSupply; i++) {
+          const man = await contract.MAN(i);
+          allManSupply.push({
+            id: i,
+            name: man.name,
+            addr: man._addr,
+            place:man.place
+          });
+        } 
+        setManData(allManSupply);
+      }
+      catch (error) {
+        console.error('Error retrieving MAN data:', error)
+      }
+     }
+    }
+    fetchMANData();
+  }, [contract])
+
   const addRMS = async () => {
     if (contract && window.ethereum !== undefined) {
       try {
