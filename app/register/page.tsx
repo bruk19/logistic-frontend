@@ -16,14 +16,14 @@ type MANData = {
   name: string;
   addr: string;
   place: string;
-}
+};
 
 type DSTData = {
-  id: number,
-  name: string,
-  addr: string,
-  place: string,
-}
+  id: number;
+  name: string;
+  addr: string;
+  place: string;
+};
 
 function Register() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(
@@ -95,53 +95,51 @@ function Register() {
 
   useEffect(() => {
     const fetchMANData = async () => {
-    if (contract) {
-      try {
-        const totalManSupply = await contract.manuCount();
-        const allManSupply = [];
-        for (let i=1; i<= totalManSupply; i++) {
-          const man = await contract.MAN(i);
-          allManSupply.push({
-            id: i,
-            name: man.name,
-            addr: man._addr,
-            place:man.place
-          });
-        } 
-        setManData(allManSupply);
+      if (contract) {
+        try {
+          const totalManSupply = await contract.manuCount();
+          const allManSupply = [];
+          for (let i = 1; i <= totalManSupply; i++) {
+            const man = await contract.MAN(i);
+            allManSupply.push({
+              id: i,
+              name: man.name,
+              addr: man._addr,
+              place: man.place,
+            });
+          }
+          setManData(allManSupply);
+        } catch (error) {
+          console.error('Error retrieving MAN data:', error);
+        }
       }
-      catch (error) {
-        console.error('Error retrieving MAN data:', error)
-      }
-     }
-    }
+    };
     fetchMANData();
-  }, [contract])
+  }, [contract]);
 
   useEffect(() => {
     const fetchDSTData = async () => {
-    if (contract) {
-      try {
-        const totalDSTSupply = await contract.distCount();
-        const allDSTSupply = [];
-        for (let i=0; i<=totalDSTSupply; i++) {
-          const dst = await contract.DST(i)
-          allDSTSupply.push({
-            id: i,
-            name: dst.name,
-            addr: dst._addr,
-            place: dst.place
-          });
+      if (contract) {
+        try {
+          const totalDSTSupply = await contract.distCount();
+          const allDSTSupply = [];
+          for (let i = 1; i <= totalDSTSupply; i++) {
+            const dst = await contract.DST(i);
+            allDSTSupply.push({
+              id: i,
+              name: dst.name,
+              addr: dst._addr,
+              place: dst.place,
+            });
+          }
+          setDistData(allDSTSupply);
+        } catch (error) {
+          console.error('Error retreiving DST data:', error);
         }
-        setDistData(allDSTSupply)
       }
-      catch (error) {
-        console.error('Error retreiving DST data:', error)
-      }
-    }
-    }
+    };
     fetchDSTData();
-  }, [contract])
+  }, [contract]);
 
   const addRMS = async () => {
     if (contract && window.ethereum !== undefined) {
@@ -185,15 +183,16 @@ function Register() {
 
         const totalMAN = await contract.manuCount();
         const totalManNumber = parseInt(totalMAN.toString(), 10);
-        const newManData = [...manData]
+        const newManData = [...manData];
         const newMan = {
           id: totalManNumber,
           name: nameMAN,
           addr: addressMAN,
-          place: placeMAN
+          place: placeMAN,
         };
+
         newManData.push(newMan);
-        setManData(newManData)
+        setManData(newManData);
 
         setNameMAN('');
         setAddressMAN('');
@@ -212,14 +211,14 @@ function Register() {
         console.log('Distributor Registered. Transaction receipt:', receipt);
         window.alert('Distributor registred successfully');
 
-        const totalDST = await  contract.distCount();
-        const allDST = parseInt(totalDST.toString(), 10);
-        const newDST = [...distData]
+        const totalDST = await contract.distCount();
+        const totalDSTNumber = parseInt(totalDST.toString(), 10);
+        const newDST = [...distData];
         const newDSTData = {
-          id: allDST,
+          id: totalDSTNumber,
           name: nameDST,
           addr: addressDST,
-          place: placeDST
+          place: placeDST,
         };
 
         newDST.push(newDSTData);
@@ -288,9 +287,9 @@ function Register() {
           Register RMS
         </button>
         <div>
-          <table className='mt-2 w-4/5 gap-y-5'>
-            <thead className='bg-slate-50 py-3 gap-x-5'>
-              <tr className='gap-x-5'> 
+          <table className="mt-2 w-4/5 gap-y-5">
+            <thead className="bg-slate-50 py-3 gap-x-5">
+              <tr className="gap-x-5">
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Place</th>
@@ -299,11 +298,11 @@ function Register() {
             </thead>
             <tbody>
               {rmsData.map((rms, index) => (
-                <tr className='even:bg-gray-100' key={index}>
-                  <td className='py-1 px-2 gap-x-2'>{rms.id}</td>
+                <tr className="even:bg-gray-100" key={index}>
+                  <td className="py-1 px-2 gap-x-2">{rms.id}</td>
                   <td>{rms.name}</td>
                   <td>{rms.place}</td>
-                  <td className='flex justify-center'>{rms.addr}</td>
+                  <td className="flex justify-center">{rms.addr}</td>
                 </tr>
               ))}
             </tbody>
@@ -341,10 +340,10 @@ function Register() {
         >
           register Manufacture
         </button>
-         <div>
-          <table className='mt-2 w-4/5 gap-y-5'>
-            <thead className='bg-slate-50 py-3 gap-x-5'>
-              <tr className='gap-x-5'> 
+        <div>
+          <table className="mt-2 w-4/5 gap-y-5">
+            <thead className="bg-slate-50 py-3 gap-x-5">
+              <tr className="gap-x-5">
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Place</th>
@@ -353,11 +352,11 @@ function Register() {
             </thead>
             <tbody>
               {manData.map((man, index) => (
-                <tr className='even:bg-gray-100' key={index}>
-                  <td className='py-1 px-2 gap-x-2'>{man.id}</td>
+                <tr className="even:bg-gray-100" key={index}>
+                  <td className="py-1 px-2 gap-x-2">{man.id}</td>
                   <td>{man.name}</td>
                   <td>{man.place}</td>
-                  <td className='flex justify-center'>{man.addr}</td>
+                  <td className="flex justify-center">{man.addr}</td>
                 </tr>
               ))}
             </tbody>
@@ -395,6 +394,28 @@ function Register() {
         >
           Register Distributor
         </button>
+        <div>
+          <table className="mt-2 w-4/5 gap-y-5">
+            <thead className="bg-slate-50 py-3 gap-x-5">
+              <tr className="gap-x-5">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Place</th>
+                <th scope="col">Ethereum Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {distData.map((dst, index) => (
+                <tr className="even:bg-gray-100" key={index}>
+                  <td className="py-1 px-2 gap-x-2">{dst.id}</td>
+                  <td>{dst.name}</td>
+                  <td>{dst.place}</td>
+                  <td className="flex justify-center">{dst.addr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="mb-12">
         <p className="flex justify-center bg-slate-100 font-bold py-2 text-l px-auto text center my-3">
