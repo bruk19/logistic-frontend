@@ -125,6 +125,18 @@ function Register() {
         console.log('Manufacutred Registered. Transction receipt:', receipt);
         window.alert('Manufacutre registred successfully');
 
+        const totalMAN = await contract.manuCount();
+        const totalManNumber = parseInt(totalMAN.toString(), 10);
+        const newManData = [...manData]
+        const newMan = {
+          id: totalManNumber,
+          name: nameMAN,
+          addr: addressMAN,
+          place: placeMAN
+        };
+        newManData.push(newMan);
+        setManData(newManData)
+
         setNameMAN('');
         setAddressMAN('');
         setPlaceMAN('');
