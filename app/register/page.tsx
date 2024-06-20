@@ -29,7 +29,6 @@ function Register() {
   const [addressRTL, setAddressRTL] = useState<string>('');
   const [placeRTL, setPlaceRTL] = useState<string>('');
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
-  const [totalRMS, setTotalRMS] = useState(0);
 
   useEffect(() => {
     async function initialize() {
@@ -88,6 +87,18 @@ const addRMS = async () => {
         receipt
       );
       window.alert('Raw Material Supplier registered successfully');
+
+      const totalSupply = await contract.rawMatCount();
+      const totalSupplyNumber = parseInt(totalSupply.toString(), 10);
+      const newRmsData = [...rmsData];
+      const newRms = {
+        id: totalSupplyNumber,
+        name: nameRMS,
+        addr: addressRMS,
+        place: placeRMS,
+      };
+      newRmsData.push(newRms);
+      setRmsData(newRmsData);
 
       setNameRMS('');
       setAddressRMS('');
