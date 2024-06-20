@@ -44,6 +44,7 @@ function Register() {
   const [placeRTL, setPlaceRTL] = useState<string>('');
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
   const [manData, setManData] = useState<MANData[]>([]);
+  const [distData, setDistData] = useState<DSTData[]>([]);
 
   useEffect(() => {
     async function initialize() {
@@ -185,6 +186,19 @@ function Register() {
         const receipt = await tx.wait();
         console.log('Distributor Registered. Transaction receipt:', receipt);
         window.alert('Distributor registred successfully');
+
+        const totalDST = await  contract.distCount();
+        const allDST = parseInt(totalDST.toString(), 10);
+        const newDST = [...distData]
+        const newDSTData = {
+          id: allDST,
+          name: nameDST,
+          addr: addressDST,
+          place: placeDST
+        };
+
+        newDST.push(newDSTData);
+        setDistData(newDST);
 
         setNameDST('');
         setAddressDST('');
