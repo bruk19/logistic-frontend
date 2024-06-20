@@ -18,6 +18,13 @@ type MANData = {
   place: string;
 }
 
+type DSTData = {
+  id: number,
+  name: string,
+  addr: string,
+  place: string,
+}
+
 function Register() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(
     undefined
