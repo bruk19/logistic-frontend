@@ -11,6 +11,13 @@ type RMSData = {
   place: string;
 };
 
+type MANData = {
+  id: number;
+  name: string;
+  addr: string;
+  place: string;
+}
+
 function Register() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(
     undefined
@@ -29,6 +36,7 @@ function Register() {
   const [addressRTL, setAddressRTL] = useState<string>('');
   const [placeRTL, setPlaceRTL] = useState<string>('');
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
+  const [manData, setManData] = useState<MANData[]>([]);
 
   useEffect(() => {
     async function initialize() {
