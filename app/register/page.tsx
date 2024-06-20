@@ -53,61 +53,61 @@ function Register() {
   }, []);
 
   useEffect(() => {
-  const fetchRMSData = async () => {
-    if (contract) {
-      try {
-        const totalSupply = await contract.rawMatCount();
-        const allSupply = [];
-        for (let i = 1; i <= totalSupply; i++) {
-          const rms = await contract.RMS(i);
-          allSupply.push({
-            id: i,
-            name: rms.name,
-            addr: rms._addr,
-            place: rms.place,
-          });
+    const fetchRMSData = async () => {
+      if (contract) {
+        try {
+          const totalSupply = await contract.rawMatCount();
+          const allSupply = [];
+          for (let i = 1; i <= totalSupply; i++) {
+            const rms = await contract.RMS(i);
+            allSupply.push({
+              id: i,
+              name: rms.name,
+              addr: rms._addr,
+              place: rms.place,
+            });
+          }
+          setRmsData(allSupply);
+        } catch (error) {
+          console.error('Error retrieving RMS data:', error);
         }
-        setRmsData(allSupply);
+      }
+    };
+
+    fetchRMSData();
+  }, [contract]);
+
+  const addRMS = async () => {
+    if (contract && window.ethereum !== undefined) {
+      try {
+        const tx = await contract.addRMS(nameRMS, addressRMS, placeRMS);
+        const receipt = await tx.wait();
+        console.log(
+          'Raw Material Supplier Registered. Transaction receipt:',
+          receipt
+        );
+        window.alert('Raw Material Supplier registered successfully');
+
+        const totalSupply = await contract.rawMatCount();
+        const totalSupplyNumber = parseInt(totalSupply.toString(), 10);
+        const newRmsData = [...rmsData];
+        const newRms = {
+          id: totalSupplyNumber,
+          name: nameRMS,
+          addr: addressRMS,
+          place: placeRMS,
+        };
+        newRmsData.push(newRms);
+        setRmsData(newRmsData);
+
+        setNameRMS('');
+        setAddressRMS('');
+        setPlaceRMS('');
       } catch (error) {
-        console.error('Error retrieving RMS data:', error);
+        console.log('Error on creating raw material supplier:', error);
       }
     }
   };
-
-  fetchRMSData();
-}, [contract]);
-
-const addRMS = async () => {
-  if (contract && window.ethereum !== undefined) {
-    try {
-      const tx = await contract.addRMS(nameRMS, addressRMS, placeRMS);
-      const receipt = await tx.wait();
-      console.log(
-        'Raw Material Supplier Registered. Transaction receipt:',
-        receipt
-      );
-      window.alert('Raw Material Supplier registered successfully');
-
-      const totalSupply = await contract.rawMatCount();
-      const totalSupplyNumber = parseInt(totalSupply.toString(), 10);
-      const newRmsData = [...rmsData];
-      const newRms = {
-        id: totalSupplyNumber,
-        name: nameRMS,
-        addr: addressRMS,
-        place: placeRMS,
-      };
-      newRmsData.push(newRms);
-      setRmsData(newRmsData);
-
-      setNameRMS('');
-      setAddressRMS('');
-      setPlaceRMS('');
-    } catch (error) {
-      console.log('Error on creating raw material supplier:', error);
-    }
-  }
-};
 
   const addMAN = async () => {
     if (contract && window.ethereum !== undefined) {
@@ -163,7 +163,7 @@ const addRMS = async () => {
   return (
     <div className="mx-8">
       <div>
-        <h1 className="text-3xl mx-4 font-bold my-5 mb-4">registeration</h1>
+        <h1 className="text-3xl mx-4 font-bold my-7 mb-4">registeration</h1>
       </div>
       <div className="mb-12">
         <p className="flex justify-center font-bold bg-slate-100 py-2 px-auto text center my-3">
@@ -197,28 +197,27 @@ const addRMS = async () => {
           Register RMS
         </button>
         <div>
-        <table>
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Place</th>
-          <th scope="col">Ethereum Address</th>
-        </tr>
-      </thead>
-      <tbody>
-       {rmsData.map((rms, index) => (
-      <tr key={index}>
-        <td>{rms.id}</td>
-        <td>{rms.name}</td>
-        <td>{rms.place}</td>
-        <td>{rms.addr}</td>
-      </tr>
-    ))}
-      </tbody>
-    </table>
+          <table className='mt-2 w-4/5 gap-y-5'>
+            <thead className='bg-slate-50 py-3 gap-x-5'>
+              <tr className='gap-x-5'> 
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Place</th>
+                <th scope="col">Ethereum Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rmsData.map((rms, index) => (
+                <tr className='even:bg-gray-100' key={index}>
+                  <td className='py-1 px-2 gap-x-2'>{rms.id}</td>
+                  <td>{rms.name}</td>
+                  <td>{rms.place}</td>
+                  <td className='flex justify-center'>{rms.addr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-
       </div>
       <div className="mb-12">
         <p className="flex justify-center bg-slate-100 font-bold py-2 px-auto text center my-3">
