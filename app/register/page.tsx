@@ -270,6 +270,28 @@ function Register() {
         >
           register Manufacture
         </button>
+         <div>
+          <table className='mt-2 w-4/5 gap-y-5'>
+            <thead className='bg-slate-50 py-3 gap-x-5'>
+              <tr className='gap-x-5'> 
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Place</th>
+                <th scope="col">Ethereum Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {manData.map((man, index) => (
+                <tr className='even:bg-gray-100' key={index}>
+                  <td className='py-1 px-2 gap-x-2'>{man.id}</td>
+                  <td>{man.name}</td>
+                  <td>{man.place}</td>
+                  <td className='flex justify-center'>{man.addr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="mb-12">
         <p className="flex justify-center bg-slate-100 font-bold py-2 px-auto text center my-3">
