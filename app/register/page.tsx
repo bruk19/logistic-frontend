@@ -29,7 +29,7 @@ function Register() {
   const [addressRTL, setAddressRTL] = useState<string>('');
   const [placeRTL, setPlaceRTL] = useState<string>('');
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
-  const [nextId, setNextId] = useState(1);
+  const [totalRMS, setTotalRMS] = useState(0);
 
   useEffect(() => {
     async function initialize() {
@@ -53,69 +53,50 @@ function Register() {
     initialize();
   }, []);
 
-    useEffect(() => {
-    // Fetch the RMS data from the contract
-    const fetchRMSData = async () => {
+  useEffect(() => {
+  const fetchRMSData = async () => {
+    if (contract) {
       try {
-        if (contract) {
-          const numRMS = await contract.getRMSCount();
-          const rmsData: RMSData[] = [];
-
-          for (let i = 0; i < numRMS; i++) {
-            const rms = await contract.RMS(i);
-            rmsData.push({
-              id: rms.id,
-              name: rms.name,
-              addr: rms._addr,
-              place: rms.place
-            });
-          }
-
-          setRmsData(rmsData);
+        const totalSupply = await contract.rawMatCount();
+        const allSupply = [];
+        for (let i = 1; i <= totalSupply; i++) {
+          const rms = await contract.RMS(i);
+          allSupply.push({
+            id: i,
+            name: rms.name,
+            addr: rms._addr,
+            place: rms.place,
+          });
         }
+        setRmsData(allSupply);
       } catch (error) {
-        console.error('Error fetching RMS data:', error);
-      }
-    };
-
-    fetchRMSData();
-  }, [contract]);
-
-  const addRMS = async () => {
-    if (contract && window.ethereum !== undefined) {
-      try {
-        const tx = await contract.addRMS(nameRMS, addressRMS, placeRMS);
-        const receipt = await tx.wait();
-        console.log(
-          'Raw Material Supplier Registared. Transaction receipt:',
-          receipt
-        );
-        window.alert('Raw Material Supplier registred successfully');
-
-        const newRmsData = [
-          ...rmsData,
-          {
-            id: nextId,
-            name: nameRMS,
-            place: placeRMS,
-            addr: addressRMS,
-          },
-        ];
-
-        setRmsData(newRmsData);
-        localStorage.setItem('rmsData', JSON.stringify(newRmsData));
-
-        setNextId((prevId) => prevId + 1);
-        localStorage.setItem('nextID', JSON.stringify(nextId + 1));
-
-        setNameRMS('');
-        setAddressRMS('');
-        setPlaceRMS('');
-      } catch (error) {
-        console.log('Error on creating raw material supplier');
+        console.error('Error retrieving RMS data:', error);
       }
     }
   };
+
+  fetchRMSData();
+}, [contract]);
+
+const addRMS = async () => {
+  if (contract && window.ethereum !== undefined) {
+    try {
+      const tx = await contract.addRMS(nameRMS, addressRMS, placeRMS);
+      const receipt = await tx.wait();
+      console.log(
+        'Raw Material Supplier Registered. Transaction receipt:',
+        receipt
+      );
+      window.alert('Raw Material Supplier registered successfully');
+
+      setNameRMS('');
+      setAddressRMS('');
+      setPlaceRMS('');
+    } catch (error) {
+      console.log('Error on creating raw material supplier:', error);
+    }
+  }
+};
 
   const addMAN = async () => {
     if (contract && window.ethereum !== undefined) {
