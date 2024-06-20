@@ -118,6 +118,31 @@ function Register() {
     fetchMANData();
   }, [contract])
 
+  useEffect(() => {
+    const fetchDSTData = async () => {
+    if (contract) {
+      try {
+        const totalDSTSupply = await contract.distCount();
+        const allDSTSupply = [];
+        for (let i=0; i<=totalDSTSupply; i++) {
+          const dst = await contract.DST(i)
+          allDSTSupply.push({
+            id: i,
+            name: dst.name,
+            addr: dst._addr,
+            place: dst.place
+          });
+        }
+        setDistData(allDSTSupply)
+      }
+      catch (error) {
+        console.error('Error retreiving DST data:', error)
+      }
+    }
+    }
+    fetchDSTData();
+  }, [contract])
+
   const addRMS = async () => {
     if (contract && window.ethereum !== undefined) {
       try {
