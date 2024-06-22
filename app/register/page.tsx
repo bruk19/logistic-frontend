@@ -52,6 +52,7 @@ function Register() {
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
   const [manData, setManData] = useState<MANData[]>([]);
   const [distData, setDistData] = useState<DSTData[]>([]);
+  const [ritData, setRitData] = useState<RTLData[]>([])
 
   useEffect(() => {
     async function initialize() {
