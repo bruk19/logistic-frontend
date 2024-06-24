@@ -90,6 +90,26 @@ function page() {
         <button onClick={addProduct}>
           Add Product
         </button>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Discription</th>
+              </tr>
+            </thead>
+            <tbody>
+              {proData.map((pro, index) => (
+                <tr key={index}>
+                <td>{pro.id}</td>
+                <td>{pro.name}</td>
+                <td>{pro.discription}</td>
+              </tr>
+              ))} 
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
