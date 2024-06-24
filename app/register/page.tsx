@@ -247,7 +247,20 @@ function Register() {
         const tx = await contract.addRTL(nameRTL, addressRTL, placeRTL);
         const receipt = await tx.wait();
         console.log('Retailer Registered. Transaction receipt:', receipt);
-        window.alert('Distributor registred successfully');
+        window.alert('Retailer registred successfully');
+
+        const totalRTL = await contract.retailCount()
+        const totalRTLNumber = parseInt(totalRTL.toString(), 10)
+        const newRTL = [...ritData]
+        const newRTLData = {
+          id: totalRTLNumber,
+          name: nameRTL,
+          addr: addressDST,
+          place: placeRTL
+        };
+
+        newRTL.push(newRTLData);
+        setRitData(newRTL);
 
         setNameRTL('');
         setAddressRTL('');
