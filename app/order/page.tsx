@@ -91,9 +91,9 @@ function page() {
           Add Product
         </button>
         <div>
-          <table>
-            <thead>
-              <tr>
+          <table className="mt-2 w-4/5 gap-y-5">
+            <thead className="bg-slate-50 py-3 gap-x-5">
+              <tr className="gap-x-5">
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Discription</th>
@@ -101,10 +101,10 @@ function page() {
             </thead>
             <tbody>
               {proData.map((pro, index) => (
-                <tr key={index}>
-                <td>{pro.id}</td>
+                <tr className="even:bg-gray-100" key={index}>
+                <td className="py-1 px-2 gap-x-2">{pro.id}</td>
                 <td>{pro.name}</td>
-                <td>{pro.discription}</td>
+                <td className="flex justify-center">{pro.discription}</td>
               </tr>
               ))} 
             </tbody>
