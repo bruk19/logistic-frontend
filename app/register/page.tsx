@@ -486,7 +486,7 @@ function Register() {
           type="text"
           placeholder="Place"
           value={placeRTL}
-          onChange={(e) => setAddressRTL(e.target.value)}
+          onChange={(e) => setPlaceRTL(e.target.value)}
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -494,6 +494,28 @@ function Register() {
         >
           Register Retailer
         </button>
+        <div>
+          <table className="mt-2 w-4/5 gap-y-5">
+            <thead className="bg-slate-50 py-3 gap-x-5">
+              <tr className="gap-x-5">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Place</th>
+                <th scope="col">Ethereum Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ritData.map((rtl, index) => (
+                <tr className="even:bg-gray-100" key={index}>
+                  <td className="py-1 px-2 gap-x-2">{rtl.id}</td>
+                  <td>{rtl.name}</td>
+                  <td>{rtl.place}</td>
+                  <td className="flex justify-center">{rtl.addr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
