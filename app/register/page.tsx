@@ -149,6 +149,31 @@ function Register() {
     fetchDSTData();
   }, [contract]);
 
+  useEffect(() => {
+    const fetchRTLData = async () => {
+      if (contract) {
+        try {
+          const totalRTLSupply = await contract.retailCount();
+          const allRTLSupply = [];
+          for (let i = 1; i <= totalRTLSupply; i++) {
+            const rtl = await contract.RTL(i);
+            allRTLSupply.push({
+              id: i,
+              name: rtl.name,
+              addr: rtl._addr,
+              place: rtl.place,
+            });
+          }
+          setRitData(allRTLSupply);
+        }
+        catch (error) {
+          console.error('Error retreiving RTL data:', error)
+        }
+      }
+    };
+    fetchRTLData();
+  }, [contract]);
+
   const addRMS = async () => {
     if (contract && window.ethereum !== undefined) {
       try {
