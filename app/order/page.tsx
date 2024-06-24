@@ -10,7 +10,8 @@ type ProductData = {
   RMSid: number,
   MANid: number,
   DSTid: number,
-  RTLid: number
+  RTLid: number,
+  Stage: STAGE,
 }
 
 function page() {
@@ -18,6 +19,7 @@ function page() {
   const [discription, setDiscription] = useState<string>('');
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
+  const [proData, setProData] = useState<ProductData[]>([])
 
   useEffect(() => {
     async function initialize() {
@@ -41,13 +43,29 @@ function page() {
         const receipt = await tx.wait();
         console.log('Raw Material supplier registered. Transaction receipt:', receipt);
         window.alert('The product is Added succesfully')
+
+        const totalProduct = await contract.medCount();
+         const totalProductNumber = parseInt(totalProduct.toString(), 10);
+         const newProData = [...proData]
+
+         const newAddedProData = {
+          id: totalProductNumber,
+          name: name,
+          discription: discription,
+          RMSid: RMSid,
+          MANid: MANid,
+          DSTid: DSTid,
+          RTLid: RTLid,
+          Stage: stage
+         }
+         newProData.push(newAddedProData);
+         setProData(newProData);
+
+         setName('')
+         setDiscription('')
       }
       catch (error) {
         console.log('Error on adding a product', error);
-
-         const totalProduct = await contract.medCount();
-         const totalProductNumber = parseInt(totalProduct.toString(), 10);
-         const 
       }
     }
   }
