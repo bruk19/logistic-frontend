@@ -38,6 +38,35 @@ function page() {
     initialize()
   }, [])
 
+  useEffect(() => {
+    async function fetchProduct() {
+      if(contract && window.ethereum !== undefined) {
+        try {
+          const totalProductList = await contract.medCount();
+          const allProduct = [];
+          for(let i=1; i<=totalProductList; i++) {
+            const prod = await contract.medicineInfo(i);
+            allProduct.push({
+              id: i,
+              name: prod.name,
+              discription: prod.discription,
+              RMSid: prod.RMSid,
+              MANid: prod.MANid,
+              DSTid: prod.DSTid,
+              RTLid: prod.RTLid,
+              Stage: prod.STAGE,
+            })
+          }
+          setProData(allProduct)
+        }
+        catch (error) {
+          console.log('Error to display a product', error)
+        }
+      }
+    }
+    fetchProduct()
+  }, [contract])
+
   const addProduct = async () => {
     if(contract && window.ethereum !== undefined) {
       try {
@@ -100,11 +129,11 @@ function page() {
               </tr>
             </thead>
             <tbody>
-              {proData.map((pro, index) => (
+              {proData.map((prod, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                <td className="py-1 px-2 gap-x-2">{pro.id}</td>
-                <td>{pro.name}</td>
-                <td className="flex justify-center">{pro.discription}</td>
+                <td className="py-1 px-2 gap-x-2">{prod.id}</td>
+                <td className="text-center">{prod.name}</td>
+                <td className="flex justify-center">{prod.discription}</td>
               </tr>
               ))} 
             </tbody>
