@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3';
 import { abi, contractAddress } from '../constants/logestics';
 import { ethers } from 'ethers';
+import { STAGE } from './abi';
 
 type ProductData = {
   id: number,
@@ -52,11 +53,11 @@ function page() {
           id: totalProductNumber,
           name: name,
           discription: discription,
-          RMSid: RMSid,
-          MANid: MANid,
-          DSTid: DSTid,
-          RTLid: RTLid,
-          Stage: stage
+          RMSid: 0,
+          MANid: 0,
+          DSTid: 0,
+          RTLid: 0,
+          Stage: STAGE.Init
          }
          newProData.push(newAddedProData);
          setProData(newProData);
