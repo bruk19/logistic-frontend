@@ -4,6 +4,8 @@ import { abi, contractAddress } from '../constants/logestics';
 import { ethers } from 'ethers';
 
 function page() {
+  const [name, setName] = useState<string>('');
+  const [discription, setDiscription] = useState<string>('');
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
 
@@ -22,6 +24,8 @@ function page() {
     initialize()
   }, [])
 
+  const addProduct = async () => {
+  }
   return (
     <div>page</div>
   )
