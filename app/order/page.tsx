@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3';
 import { abi, contractAddress } from '../constants/logestics';
@@ -72,7 +73,25 @@ function page() {
   }
 
   return (
-    <div>page</div>
+    <div>
+      <div>
+        <input 
+        type='text'
+        placeholder='Product Name'
+        value={name}
+        onChange={(e)=> setName(e.target.value)}
+        />
+        <input
+        type='text'
+        placeholder='Discription'
+        value={discription}
+        onChange={(e) => setDiscription(e.target.value)} 
+        />
+        <button onClick={addProduct}>
+          Add Product
+        </button>
+      </div>
+    </div>
   )
 }
 
