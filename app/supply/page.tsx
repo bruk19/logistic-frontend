@@ -220,6 +220,16 @@ const sold = async() => {
         <button onClick={moveToRetailer}>
           Retailer
         </button>
+        <h2>sold</h2>
+        <input
+        type="text"
+        placeholder='Product Id'
+        value={Sid}
+        onChange={(e) => setSid(e.target.value)}
+        />
+        <button onClick={sold}>
+          sold
+        </button>
     </div>
       <div>
         <table className="mt-2 w-full gap-y-5">
