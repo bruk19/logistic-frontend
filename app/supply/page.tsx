@@ -22,6 +22,7 @@ function page() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [wallletAddress, setWalletAddress] = useState<string | null>(null)
   const [medPro, setMedPro] = useState<ProductData[]>([])
+  const [id, setId] = useState<number | string>('')
 
   useEffect(() =>{
     async function initialize () {
@@ -66,8 +67,44 @@ function page() {
     }
     fetchProduct()
   }, [contract])
+
+const moveToSupply = async () => {
+  if (contract && window.ethereum !== undefined) {
+    try {
+      // Check the current stage of the product
+      const currentStage = await contract.showStage(id);
+      console.log("Current stage:", currentStage);
+      if (currentStage === 'Medicine Ordered') {
+        // Move the product to the raw material supply stage
+        const tx = await contract.RMSupply(id);
+        const receipt = await tx.wait();
+        console.log('Product moved to supplier. Transaction receipt:', receipt);
+        window.alert('The product has been added to the supplier successfully.');
+        setId('');
+      } else {
+        window.alert('The product is not in the initial stage, cannot move to supply.');
+        return;
+      }
+    } catch (error) {
+      console.log('Error adding product to supply:', error);
+    }
+  }
+};
+
   return (
     <div className="m-10"> 
+    <div>
+      <h2>supply</h2>
+      <input
+       type="text"
+       placeholder='Product Id'
+       value={id}
+       onChange={(e) => setId(e.target.value)} 
+       />
+       <button onClick={moveToSupply}>
+        Supply
+       </button>
+    </div>
       <div>
         <table className="mt-2 w-full gap-y-5">
             <thead className="bg-slate-50 py-3 gap-x-5">
