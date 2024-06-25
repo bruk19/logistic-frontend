@@ -22,6 +22,7 @@ function page() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [proData, setProData] = useState<ProductData[]>([])
+  const [medPro, setMedPro] = useState<ProductData[]>([])
 
   useEffect(() => {
     async function initialize() {
@@ -46,6 +47,7 @@ function page() {
           const allProduct = [];
           for(let i=1; i<=totalProductList; i++) {
             const prod = await contract.medicineInfo(i);
+            const stage = await contract.showStage(i);
             allProduct.push({
               id: i,
               name: prod.name,
@@ -54,10 +56,11 @@ function page() {
               MANid: prod.MANid,
               DSTid: prod.DSTid,
               RTLid: prod.RTLid,
-              Stage: prod.STAGE,
+              Stage: stage,
             })
           }
           setProData(allProduct)
+          setMedPro(allProduct)
         }
         catch (error) {
           console.log('Error to display a product', error)
@@ -102,23 +105,28 @@ function page() {
   }
 
   return (
-    <div>
+    <div className="m-10">
+      <h1 className='text-2xl font-bold mb-2'>Add Product Order</h1>
       <div>
         <input 
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Product Name'
         value={name}
         onChange={(e)=> setName(e.target.value)}
         />
         <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
         type='text'
         placeholder='Discription'
         value={discription}
         onChange={(e) => setDiscription(e.target.value)} 
         />
-        <button onClick={addProduct}>
-          Add Product
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+         onClick={addProduct}>
+          Order Product
         </button>
+        <h3 className='mt-6 text-1xl font-bold'>Ordered Product:</h3>
         <div>
           <table className="mt-2 w-4/5 gap-y-5">
             <thead className="bg-slate-50 py-3 gap-x-5">
@@ -126,14 +134,16 @@ function page() {
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Discription</th>
+                <th scope="col">Product Stage</th>
               </tr>
             </thead>
             <tbody>
               {proData.map((prod, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                <td className="py-1 px-2 gap-x-2">{prod.id}</td>
+                <td className="text-center py-1 px-2 gap-x-2">{prod.id}</td>
                 <td className="text-center">{prod.name}</td>
                 <td className="flex justify-center">{prod.discription}</td>
+                <td className='text-center'>{prod.Stage}</td>
               </tr>
               ))} 
             </tbody>
