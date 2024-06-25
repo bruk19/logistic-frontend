@@ -24,6 +24,7 @@ function page() {
   const [medPro, setMedPro] = useState<ProductData[]>([])
   const [id, setId] = useState<number | string>('')
   const [Mid, setMid] = useState<number | string>('')
+  const [Did, setDid] = useState<number | string>('')
 
   useEffect(() =>{
     async function initialize () {
@@ -100,7 +101,7 @@ const moveToManufacture = async() => {
         const tx = await contract.MANSupply(Mid);
         const receipt = await tx.wait();
         console.log('Product moved to Manufacture. Transaction receipt:', receipt)
-        window.alert('The product has been added to the manurere successfully.')
+        window.alert('The product has been added to the manufacture successfully.')
         setId('')
       } else {
         window.alert('The product is not in the raw materail supply stage,cannot move to manufacture');
@@ -111,6 +112,26 @@ const moveToManufacture = async() => {
     }
   }
 };
+
+const moveToDistributer = async() => {
+  if (contract && window.ethereum !== undefined) {
+    try {
+      const currentStage = await contract.showStage(Did)
+      if (currentStage === "Medicine on Manufacture Stage") {
+        const tx = await contract.DSTSupply(Did);
+        const receipt = await tx.wait()
+        console.log('Product moved to Distributer. Transaction receipt:', receipt)
+        window.alert('The product has been added to the distributor successfully')
+
+        setDid('')
+      } else {
+        window.alert('the Product is not in manufacture stage, cannot move to distributor')
+      }
+    } catch (error) {
+      console.log('Error on moving  the product to distributer')
+    }
+  }
+}
 
   return (
     <div className="m-10"> 
