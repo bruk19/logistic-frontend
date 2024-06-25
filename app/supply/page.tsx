@@ -23,6 +23,7 @@ function page() {
   const [wallletAddress, setWalletAddress] = useState<string | null>(null)
   const [medPro, setMedPro] = useState<ProductData[]>([])
   const [id, setId] = useState<number | string>('')
+  const [Mid, setMid] = useState<number | string>('')
 
   useEffect(() =>{
     async function initialize () {
@@ -80,7 +81,7 @@ const moveToSupply = async () => {
         const receipt = await tx.wait();
         console.log('Product moved to supplier. Transaction receipt:', receipt);
         window.alert('The product has been added to the supplier successfully.');
-        setId('');
+        setMid('');
       } else {
         window.alert('The product is not in the initial stage, cannot move to supply.');
         return;
@@ -94,9 +95,9 @@ const moveToSupply = async () => {
 const moveToManufacture = async() => {
   if (contract && window.ethereum !== undefined) {
     try {
-      const currentStage = await contract.showStage(id);
+      const currentStage = await contract.showStage(Mid);
       if (currentStage === "Medicine on Raw Material Supply Stage") {
-        const tx = await contract.MANSupply(id);
+        const tx = await contract.MANSupply(Mid);
         const receipt = await tx.wait();
         console.log('Product moved to Manufacture. Transaction receipt:', receipt)
         window.alert('The product has been added to the manurere successfully.')
@@ -124,6 +125,16 @@ const moveToManufacture = async() => {
        <button onClick={moveToSupply}>
         Supply
        </button>
+       <h2>manufacture</h2>
+       <input
+        type="text" 
+        placeholder='Product Id'
+        value={Mid}
+        onChange={(e) => setMid(e.target.value)}
+        />
+        <button onClick={moveToManufacture}>
+          Manufacture
+        </button>
     </div>
       <div>
         <table className="mt-2 w-full gap-y-5">
