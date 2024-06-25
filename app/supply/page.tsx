@@ -86,7 +86,27 @@ const moveToSupply = async () => {
         return;
       }
     } catch (error) {
-      console.log('Error adding product to supply:', error);
+      console.log('Error moving product to supply:', error);
+    }
+  }
+};
+
+const moveToManufacture = async() => {
+  if (contract && window.ethereum !== undefined) {
+    try {
+      const currentStage = await contract.showStage(id);
+      if (currentStage === "Medicine on Raw Material Supply Stage") {
+        const tx = await contract.MANSupply(id);
+        const receipt = await tx.wait();
+        console.log('Product moved to Manufacture. Transaction receipt:', receipt)
+        window.alert('The product has been added to the manurere successfully.')
+        setId('')
+      } else {
+        window.alert('The product is not in the raw materail supply stage,cannot move to manufacture');
+        return;
+      }
+    } catch (error) {
+      console.log('Error on moving to the manufacture:', error)
     }
   }
 };
