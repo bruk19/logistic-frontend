@@ -26,6 +26,7 @@ function page() {
   const [Mid, setMid] = useState<number | string>('')
   const [Did, setDid] = useState<number | string>('')
   const [Rid, setRid] = useState<number | string>('')
+  const [Sid, setSid] = useState<number | string>('')
 
   useEffect(() =>{
     async function initialize () {
@@ -151,6 +152,27 @@ const moveToRetailer = async() => {
       }
     } catch (error) {
       console.log('Error to move the otduct to retailer:', error)
+    }
+  }
+}
+
+const sold = async() => {
+  if(contract && window.ethereum !== undefined) {
+    try {
+      const soldProduct = await contract.showStage(Sid)
+      if (soldProduct === "Medicine on Retail Stage"){
+        const tx = await contract.sold(Sid)
+        const receipt = await tx.wait()
+        console.log('Product sold. Transaction receipt:', receipt)
+        window.alert('The product sold successfully')
+
+        setSid('')
+      }  else {
+        window.alert('the Product is not in retailer stage, cannot move to retailer')
+      }
+    }
+    catch (error) {
+      console.log('Error to sold the product', error)
     }
   }
 }
