@@ -156,6 +156,16 @@ const moveToDistributer = async() => {
         <button onClick={moveToManufacture}>
           Manufacture
         </button>
+        <h2>Distributor</h2>
+        <input
+        type="text"
+        placeholder='Product Id'
+        value={Did}
+        onChange={(e) => setDid(e.target.value)}
+        />
+        <button onClick={moveToDistributer}>
+          Distributor
+        </button>
     </div>
       <div>
         <table className="mt-2 w-full gap-y-5">
