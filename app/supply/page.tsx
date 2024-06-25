@@ -1,10 +1,11 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3'
 import { ethers } from 'ethers'
 import { abi, contractAddress } from '../constants/logestics'
 import { STAGE } from '../order/abi'
 
-type productData = {
+type ProductData = {
   id: number,
   name: string,
   discription: string,
@@ -12,13 +13,15 @@ type productData = {
   MANid: number,
   DSTid: number,
   RTLid: number,
-  STAGE: STAGE
+  Stage: STAGE,
 }
+
 
 function page() {
 
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [wallletAddress, setWalletAddress] = useState<string | null>(null)
+  const [medPro, setMedPro] = useState<ProductData[]>([])
 
   useEffect(() =>{
     async function initialize () {
@@ -36,18 +39,37 @@ function page() {
   }, [])
 
   useEffect(() => {
-    async function fetchProudct () {
+    async function fetchProduct () {
       if(contract && window.ethereum !== undefined) {
-        try{
-        }
-        catch (error) {
+        try {
+          const totalProductList = await contract.medCount();
+          const allProduct = [];
+          for(let i=1; i<=totalProductList; i++) {
+            const prod = await contract.medicineInfo(i);
+            const stage = await contract.showStage(i);
+            allProduct.push({
+              id: i,
+              name: prod.name,
+              discription: prod.discription,
+              RMSid: prod.RMSid,
+              MANid: prod.MANid,
+              DSTid: prod.DSTid,
+              RTLid: prod.RTLid,
+              Stage: stage,
+            })
+          } setMedPro(allProduct)
+          }
+          catch (error) {
           console.log('Error to display a product list', error)
         }
       }
     }
-  })
+    fetchProduct()
+  }, [contract])
   return (
-    <div>page</div>
+    <div className="m-10"> 
+      
+    </div>
   )
 }
 

@@ -22,7 +22,6 @@ function page() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [proData, setProData] = useState<ProductData[]>([])
-  const [medPro, setMedPro] = useState<ProductData[]>([])
 
   useEffect(() => {
     async function initialize() {
@@ -60,7 +59,6 @@ function page() {
             })
           }
           setProData(allProduct)
-          setMedPro(allProduct)
         }
         catch (error) {
           console.log('Error to display a product', error)
