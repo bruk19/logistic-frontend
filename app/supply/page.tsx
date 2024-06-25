@@ -69,18 +69,18 @@ function page() {
   return (
     <div className="m-10"> 
       <div>
-        <table className="mt-2 w-4/5 gap-y-5">
+        <table className="mt-2 w-full gap-y-5">
             <thead className="bg-slate-50 py-3 gap-x-5">
-              <tr className="gap-x-5">
+              <tr className="gap-x-5 text-black">
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Discription</th>
                 <th scope="col">Product Stage</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='odd:bg-black-100' >
               {medPro.map((prod, index) => (
-                <tr className="even:bg-gray-100" key={index}>
+                <tr className="even:bg-gray-100 text-black" key={index}>
                 <td className="text-center py-1 px-2 gap-x-2">{prod.id}</td>
                 <td className="text-center">{prod.name}</td>
                 <td className="flex justify-center">{prod.discription}</td>
