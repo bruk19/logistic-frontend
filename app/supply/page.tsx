@@ -83,7 +83,7 @@ function page() {
         // Check the current stage of the product
         const currentStage = await contract.showStage(id);
         console.log('Current stage:', currentStage);
-        if (currentStage === 'Medicine Ordered') {
+        if (currentStage === 'Product Ordered') {
           // Move the product to the raw material supply stage
           const tx = await contract.RMSupply(id);
           const receipt = await tx.wait();
@@ -111,7 +111,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Mid);
-        if (currentStage === 'Medicine on Raw Material Supply Stage') {
+        if (currentStage === 'Product on Raw Material Supply Stage') {
           const tx = await contract.MANSupply(Mid);
           const receipt = await tx.wait();
           console.log(
@@ -138,7 +138,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Did);
-        if (currentStage === 'Medicine on Manufacture Stage') {
+        if (currentStage === 'Product on Manufacture Stage') {
           const tx = await contract.DSTSupply(Did);
           const receipt = await tx.wait();
           console.log(
@@ -165,7 +165,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Rid);
-        if (currentStage === 'Medicine on Distribution Stage') {
+        if (currentStage === 'Product on Distribution Stage') {
           const tx = await contract.RTLSupply(Rid);
           const receipt = await tx.wait();
           console.log(
@@ -192,7 +192,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const soldProduct = await contract.showStage(Sid);
-        if (soldProduct === 'Medicine on Retail Stage') {
+        if (soldProduct === 'Product on Retail Stage') {
           const tx = await contract.sold(Sid);
           const receipt = await tx.wait();
           console.log('Product sold. Transaction receipt:', receipt);
