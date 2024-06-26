@@ -1,3 +1,4 @@
+'use client'
 import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3'
@@ -18,7 +19,9 @@ function page() {
       const wallet = await signer.getAddress()
       setWalletAddress(wallet)
     }
+    initialize()
   }, [])
+
   return (
     <div>page</div>
   )

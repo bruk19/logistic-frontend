@@ -73,7 +73,8 @@ function page() {
         }
       }
     }
-    fetchProduct();
+    const interval = setInterval(fetchProduct, 5000);
+    return () => clearInterval(interval);
   }, [contract]);
 
   const moveToSupply = async () => {
@@ -93,7 +94,7 @@ function page() {
           window.alert(
             'The product has been added to the supplier successfully.'
           );
-          setMid('');
+          setId('');
         } else {
           window.alert(
             'The product is not in the initial stage, cannot move to supply.'
@@ -120,7 +121,7 @@ function page() {
           window.alert(
             'The product has been added to the manufacture successfully.'
           );
-          setId('');
+          setMid('');
         } else {
           window.alert(
             'The product is not in the raw materail supply stage,cannot move to manufacture'
