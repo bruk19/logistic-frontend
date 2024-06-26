@@ -82,6 +82,20 @@ function page() {
     }
   }
 
+  const TrackedProductInfo = ({ product }: { product: TrackedProduct }) => (
+    <div className="mt-4 p-4 border rounded">
+      <h3 className="text-xl font-bold mb-2">Tracked Product Information</h3>
+      <p><strong>ID:</strong> {product.id}</p>
+      <p><strong>Name:</strong> {product.name}</p>
+      <p><strong>Description:</strong> {product.description}</p>
+      <p><strong>Current Stage:</strong> {product.Stage}</p>
+      <h4 className="font-bold mt-2">Supply Chain:</h4>
+      <p><strong>Supplier:</strong> ID: {product.supplier.id}, Name: {product.supplier.name}, Place: {product.supplier.place}</p>
+      <p><strong>Manufacturer:</strong> ID: {product.manufacturer.id}, Name: {product.manufacturer.name}, Place: {product.manufacturer.place}</p>
+      <p><strong>Distributor:</strong> ID: {product.distributor.id}, Name: {product.distributor.name}, Place: {product.distributor.place}</p>
+      <p><strong>Retailer:</strong> ID: {product.retailer.id}, Name: {product.retailer.name}, Place: {product.retailer.place}</p>
+    </div>
+  );
 
   return (
     <div>
