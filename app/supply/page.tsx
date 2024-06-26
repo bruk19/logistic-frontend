@@ -178,62 +178,12 @@ const sold = async() => {
 }
 
   return (
-    <div className="m-10"> 
+    <div className="w-full mt-6"> 
     <div>
-      <h2>supply</h2>
-      <input
-       type="text"
-       placeholder='Product Id'
-       value={id}
-       onChange={(e) => setId(e.target.value)} 
-       />
-       <button onClick={moveToSupply}>
-        Supply
-       </button>
-       <h2>manufacture</h2>
-       <input
-        type="text" 
-        placeholder='Product Id'
-        value={Mid}
-        onChange={(e) => setMid(e.target.value)}
-        />
-        <button onClick={moveToManufacture}>
-          Manufacture
-        </button>
-        <h2>Distributor</h2>
-        <input
-        type="text"
-        placeholder='Product Id'
-        value={Did}
-        onChange={(e) => setDid(e.target.value)}
-        />
-        <button onClick={moveToDistributer}>
-          Distributor
-        </button>
-        <h2>Retailer</h2>
-        <input
-        type="text"
-        placeholder='Product Id'
-        value={Rid}
-        onChange={(e) => setRid(e.target.value)}
-        />
-        <button onClick={moveToRetailer}>
-          Retailer
-        </button>
-        <h2>sold</h2>
-        <input
-        type="text"
-        placeholder='Product Id'
-        value={Sid}
-        onChange={(e) => setSid(e.target.value)}
-        />
-        <button onClick={sold}>
-          sold
-        </button>
-    </div>
-      <div>
-        <table className="mt-2 w-full gap-y-5">
-            <thead className="bg-slate-50 py-3 gap-x-5">
+      <h1 className='text-3xl my-3 font-bold text-center'>Product Supply Chain Flow</h1>
+      <h2 className='text-1xl my-3 font-bold text-center'>Product order -{'>'} Raw Material Supplier -{'>'} Manufacturer -{'>'} Distributor -{'>'} Retailer -{'>'} Consumer</h2>
+        <table className="mt-2 w-full gap-y-5 bg-black-100 text-white">
+            <thead className="bg-slate-300 py-3 gap-x-5">
               <tr className="gap-x-5 text-black">
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
@@ -241,9 +191,9 @@ const sold = async() => {
                 <th scope="col">Product Stage</th>
               </tr>
             </thead>
-            <tbody className='odd:bg-black-100' >
+            <tbody >
               {medPro.map((prod, index) => (
-                <tr className="even:bg-gray-100 text-black" key={index}>
+                <tr className='bg-black text-white border-b-[2px]' key={index}>
                 <td className="text-center py-1 px-2 gap-x-2">{prod.id}</td>
                 <td className="text-center">{prod.name}</td>
                 <td className="flex justify-center">{prod.discription}</td>
@@ -253,6 +203,79 @@ const sold = async() => {
             </tbody>
           </table>
       </div>
+    <div className='w-full m-10'>
+      <div className='border-b-[2px] py-2 my-3'>
+              <h2 className='tx-2xl font-bold mt-3'>Step 1: Supply Raw Material (Only a registered Raw Material supplier)</h2>
+         <input
+      className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+       type="text"
+       placeholder='Product Id'
+       value={id}
+       onChange={(e) => setId(e.target.value)} 
+       />
+       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+       onClick={moveToSupply}>
+        Supply
+       </button>
+      </div>
+     
+       <div className='border-b-[2px] py-2 my-3'>
+        <h2 className='tx-2xl font-bold mt-3'>Step 2: Manufacture (Only a registered Manufacturer)</h2>
+       <input
+       className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+        type="text" 
+        placeholder='Product Id'
+        value={Mid}
+        onChange={(e) => setMid(e.target.value)}
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={moveToManufacture}>
+          Manufacture
+        </button>
+       </div>
+       <div className='border-b-[2px] py-2 my-3'>
+         <h2 className='tx-2xl font-bold mt-3'>Step 3: Distribute (Only a registered Distributor)</h2>
+        <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+        type="text"
+        placeholder='Product Id'
+        value={Did}
+        onChange={(e) => setDid(e.target.value)}
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={moveToDistributer}>
+          Distributor
+        </button>
+       </div>
+        <div className='border-b-[2px] py-2 my-3'>
+          <h2 className='tx-2xl font-bold mt-3'>Step 4: Retail (Only a registered Retailer)</h2>
+        <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+        type="text"
+        placeholder='Product Id'
+        value={Rid}
+        onChange={(e) => setRid(e.target.value)}
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={moveToRetailer}>
+          Retailer
+        </button>
+        </div>
+        <div className='border-b-[2px] py-2 my-3'>
+          <h2 className='tx-2xl font-bold mt-3'>Step 5: Sold (Only a registered Retailer)</h2>
+        <input
+        className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+        type="text"
+        placeholder='Product Id'
+        value={Sid}
+        onChange={(e) => setSid(e.target.value)}
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={sold}>
+          sold
+        </button>
+        </div>
+    </div>
     </div>
   )
 }
