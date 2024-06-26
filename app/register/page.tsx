@@ -345,10 +345,10 @@ function Register() {
             <tbody>
               {rmsData.map((rms, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                  <td className="py-1 px-2 gap-x-2">{rms.id}</td>
-                  <td>{rms.name}</td>
-                  <td>{rms.place}</td>
-                  <td className="flex justify-center">{rms.addr}</td>
+                  <td className="py-1 px-2 gap-x-2 text-center">{rms.id}</td>
+                  <td className="text-center">{rms.name}</td>
+                  <td className='text-center'>{rms.place}</td>
+                  <td className="text-center">{rms.addr}</td>
                 </tr>
               ))}
             </tbody>
@@ -399,10 +399,10 @@ function Register() {
             <tbody>
               {manData.map((man, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                  <td className="py-1 px-2 gap-x-2">{man.id}</td>
-                  <td>{man.name}</td>
-                  <td>{man.place}</td>
-                  <td className="flex justify-center">{man.addr}</td>
+                  <td className="py-1 px-2 gap-x-2 text-center">{man.id}</td>
+                  <td className="text-center">{man.name}</td>
+                  <td className="text-center">{man.place}</td>
+                  <td className="text-center">{man.addr}</td>
                 </tr>
               ))}
             </tbody>
@@ -453,10 +453,10 @@ function Register() {
             <tbody>
               {distData.map((dst, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                  <td className="py-1 px-2 gap-x-2">{dst.id}</td>
-                  <td>{dst.name}</td>
-                  <td>{dst.place}</td>
-                  <td className="flex justify-center">{dst.addr}</td>
+                  <td className="py-1 px-2 gap-x-2 text-center">{dst.id}</td>
+                  <td className="text-center">{dst.name}</td>
+                  <td className="text-center">{dst.place}</td>
+                  <td className="text-center">{dst.addr}</td>
                 </tr>
               ))}
             </tbody>
@@ -507,10 +507,10 @@ function Register() {
             <tbody>
               {ritData.map((rtl, index) => (
                 <tr className="even:bg-gray-100" key={index}>
-                  <td className="py-1 px-2 gap-x-2">{rtl.id}</td>
-                  <td>{rtl.name}</td>
-                  <td>{rtl.place}</td>
-                  <td className="flex justify-center">{rtl.addr}</td>
+                  <td className="py-1 px-2 gap-x-2 text-center">{rtl.id}</td>
+                  <td className="text-center">{rtl.name}</td>
+                  <td className="text-center">{rtl.place}</td>
+                  <td className="text-center">{rtl.addr}</td>
                 </tr>
               ))}
             </tbody>
