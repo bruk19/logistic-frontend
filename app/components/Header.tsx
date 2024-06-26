@@ -52,10 +52,10 @@ function Header() {
       </div>
       <div>
         <ul className={`text-slate-50 gap-y-4 ${showMenu ? 'block' : 'hidden'} sm:flex sm:gap-x-10 sm:visible`}>
-          <li>Register</li>
-          <li>Order Product</li>
-          <li>Control Supply Chain</li>
-          <li>Track Product</li>
+          <li><a href="/register"> Register</a></li>
+          <li><a href="/order"> Order Product</a></li>
+          <li><a href="/supply"> Control Supply Chain</a></li>
+          <li><a href="/track">Track Product</a></li>
         </ul>
       </div>
       <div className='visible sm:invisible'>
