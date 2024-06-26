@@ -44,7 +44,7 @@ function page() {
 
         const supplierInfo = await contract.RMS(productInfo.RMSid)
         const manufactureInfo = await contract.MAN(productInfo.MANid)
-        const distributorInfo = await contract.DST(productInfo.DSTid)
+        const distributorInfo = await contract.DST(productInfo.DISTid)
         const retailerInfo = await contract.RTL(productInfo.RTLid)
 
         setTrackedProduct({
@@ -52,10 +52,26 @@ function page() {
           name: productInfo.name,
           description: productInfo.discription,
           Stage: stage,
-          supplier: supplierInfo,
-          manufacturer: manufactureInfo,
-          distributor: distributorInfo,
-          retailer: retailerInfo
+          supplier: {
+            id: Number(supplierInfo.id),
+            name: supplierInfo.name,
+            place: supplierInfo.place
+          },
+          manufacturer: {
+            id: Number(manufactureInfo.id),
+            name: manufactureInfo.name,
+            place: manufactureInfo.place
+          },
+          distributor: {
+            id: Number(distributorInfo.id),
+            name: distributorInfo.name,
+            place: distributorInfo.place
+          },
+          retailer: {
+            id: Number(retailerInfo.id),
+            name: retailerInfo.name,
+            place: retailerInfo.place
+          }
         })
         setId('')
       }
@@ -66,8 +82,27 @@ function page() {
     }
   }
 
+
   return (
-    <div>page</div>
+    <div>
+    <div className="border-b-[2px] py-2 my-3">
+          <h2 className="tx-2xl font-bold mt-3">Track Product</h2>
+          <input
+            className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
+            type="text"
+            placeholder="Product Id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={trackProduct}
+          >
+            Track
+          </button>
+        </div>
+
+      </div>
   )
 }
 
