@@ -83,24 +83,50 @@ function page() {
   }
 
   const TrackedProductInfo = ({ product }: { product: TrackedProduct }) => (
-    <div className="mt-4 p-4 border rounded">
-      <h3 className="text-xl font-bold mb-2">Tracked Product Information</h3>
+  <div className="mt-4 mx-4 p-4 border rounded border-b-[2px]">
+    <h3 className="text-2xl font-bold mb-2 text-center">Tracked Product Information</h3>
+    <h3 className="text-xl font-bold mb-2">Product:</h3>
+    <div className="bg-gray-300 px-5 py-2 gap-y-2 grid gap-y-4">
       <p><strong>ID:</strong> {product.id}</p>
       <p><strong>Name:</strong> {product.name}</p>
       <p><strong>Description:</strong> {product.description}</p>
       <p><strong>Current Stage:</strong> {product.Stage}</p>
-      <h4 className="font-bold mt-2">Supply Chain:</h4>
-      <p><strong>Supplier:</strong> ID: {product.supplier.id}, Name: {product.supplier.name}, Place: {product.supplier.place}</p>
-      <p><strong>Manufacturer:</strong> ID: {product.manufacturer.id}, Name: {product.manufacturer.name}, Place: {product.manufacturer.place}</p>
-      <p><strong>Distributor:</strong> ID: {product.distributor.id}, Name: {product.distributor.name}, Place: {product.distributor.place}</p>
-      <p><strong>Retailer:</strong> ID: {product.retailer.id}, Name: {product.retailer.name}, Place: {product.retailer.place}</p>
     </div>
-  );
+    <h4 className="font-bold text-xl mt-3">Supply Chain:</h4>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="bg-gray-300 p-4 rounded-md">
+        <h5 className="text-lg font-bold mb-2 text-center">Supplier</h5>
+        <p><strong>Supplier ID:</strong> {product.supplier.id}</p>
+        <p><strong>Supplier Name:</strong> {product.supplier.name}</p>
+        <p><strong>Supplier Place:</strong> {product.supplier.place}</p>
+      </div>
+      <div className="bg-gray-300 p-4 rounded-md">
+        <h5 className="text-lg font-bold mb-2 text-center">Manufacturer</h5>
+        <p><strong>Manufacturer ID:</strong> {product.manufacturer.id}</p>
+        <p><strong>Manufacturer Name:</strong> {product.manufacturer.name}</p>
+        <p><strong>Manufacturer Place:</strong> {product.manufacturer.place}</p>
+      </div>
+      <div className="bg-gray-300 p-4 rounded-md">
+        <h5 className="text-lg font-bold mb-2 text-center">Distributor</h5>
+        <p><strong>Distributor ID:</strong> {product.distributor.id}</p>
+        <p><strong>Distributor Name:</strong> {product.distributor.name}</p>
+        <p><strong>Distributor Place:</strong> {product.distributor.place}</p>
+      </div>
+      <div className="bg-gray-300 p-4 rounded-md">
+        <h5 className="text-lg font-bold mb-2 text-center">Retailer</h5>
+        <p><strong>Retailer ID:</strong> {product.retailer.id}</p>
+        <p><strong>Retailer Name:</strong> {product.retailer.name}</p>
+        <p><strong>Retailer Place:</strong> {product.retailer.place}</p>
+      </div>
+    </div>
+  </div>
+);
 
   return (
     <div>
-    <div className="border-b-[2px] py-2 my-3">
-          <h2 className="tx-2xl font-bold mt-3">Track Product</h2>
+    <div className="border-b-[2px] py-2 my-5">
+          <h1 className="text-3xl font-bold mt-3 py-3 px-5 text-center">Track Product</h1>
+          <h2 className="text-2xl font-bold mt-3 py-3 px-5">Enter Product ID to track it</h2>
           <input
             className="border-gray-300 border rounded px-3 py-2 flex-1 mx-2"
             type="text"
@@ -109,13 +135,12 @@ function page() {
             onChange={(e) => setId(e.target.value)}
           />
           <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={trackProduct}
           >
             Track
           </button>
         </div>
-
         {trackedProduct && <TrackedProductInfo product={trackedProduct} />}
       </div>
   )
