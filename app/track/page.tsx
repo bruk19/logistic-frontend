@@ -116,6 +116,7 @@ function page() {
           </button>
         </div>
 
+        {trackedProduct && <TrackedProductInfo product={trackedProduct} />}
       </div>
   )
 }
