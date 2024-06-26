@@ -216,8 +216,8 @@ function page() {
           Product Supply Chain Flow
         </h1>
         <h2 className="text-1xl my-3 font-bold text-center">
-          Product order -{'>'} Raw Material Supplier -{'>'} Manufacturer -{'>'}{' '}
-          Distributor -{'>'} Retailer -{'>'} Consumer
+          Product order  -{'>'} Raw Material Supplier  -{'>'} Manufacturer  -{'>'}{' '}
+          Distributor  -{'>'} Retailer  -{'>'} Consumer
         </h2>
         <table className="mt-2 w-full gap-y-5 bg-black-100 text-white">
           <thead className="bg-slate-300 py-3 gap-x-5">
