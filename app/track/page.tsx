@@ -3,6 +3,18 @@ import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3'
 import { abi, contractAddress } from '../constants/logestics'
+import { STAGE } from '../order/abi'
+
+type TrackedProduct = {
+  id: number;
+  name: string;
+  description: string;
+  stage: STAGE;
+  supplier: { id: number; name: string; place: string };
+  manufacturer: { id: number; name: string; place: string };
+  distributor: { id: number; name: string; place: string };
+  retailer: { id: number; name: string; place: string };
+};
 
 function page() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(undefined)
@@ -21,6 +33,10 @@ function page() {
     }
     initialize()
   }, [])
+
+  const trackProduct = async () => {
+
+  }
 
   return (
     <div>page</div>
