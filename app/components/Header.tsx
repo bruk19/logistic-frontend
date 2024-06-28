@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getWeb3, setUpWeb3 } from '../web3';
 import { ethers } from 'ethers';
 import { abi, contractAddress } from '../constants/logestics';
+import Image from 'next/image';
 
 function Header() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -60,7 +61,7 @@ function Header() {
     <div>
       <div className='w-full flex py-4 bg-zinc-600 px-20 justify justify-between'>
       <div>
-        <h1 className='text-slate-50 text-lg font-sans font-bold'><a href="/">Logistic-Supply</a></h1>
+        <h1 className='text-slate-50 text-lg font-sans font-bold relative left-20'><a href="/"><Image src="/logo.png" alt="Site Logo" width={90} height={40} /></a></h1>
       </div>
       <div>
         <ul className={`text-slate-50 relative left-40 gap-y-4 ${showMenu ? 'block' : 'hidden'} sm:flex sm:gap-x-10 sm:visible`}>
