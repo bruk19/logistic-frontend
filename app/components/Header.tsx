@@ -30,7 +30,6 @@ function Header() {
 
       const wallet = await signer.getAddress();
       setWalletAddress(wallet);
-      setIsLoading(false);
     }
     initialize();
   }, [walletAddress]);
