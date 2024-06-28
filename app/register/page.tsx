@@ -216,6 +216,13 @@ function Register() {
             errorMessageRMS = revertMessageMatch[1];
           }
         }
+        setErrorMessageRMS(errorMessageRMS);
+        setTimeout(() => {
+        setNameRMS('');
+        setAddressRMS('');
+        setPlaceRMS('');
+        setErrorMessageRMS('');
+      }, 5000);
       }
     }
   };
@@ -257,6 +264,12 @@ function Register() {
           }
         }
         setErrorMessageMAN(errorMessageMAN);
+        setTimeout(() => {
+        setNameRMS('');
+        setAddressRMS('');
+        setPlaceRMS('');
+        setErrorMessageRMS('');
+      }, 5000);
       }
     }
   };
@@ -298,6 +311,12 @@ function Register() {
           }
         }
         setErrorMessageDST(errorMessageDST);
+        setTimeout(() => {
+        setNameRMS('');
+        setAddressRMS('');
+        setPlaceRMS('');
+        setErrorMessageRMS('');
+      }, 5000);
       }
     }
   };
@@ -339,6 +358,12 @@ function Register() {
           }
         }
         setErrorMessageRTL(errorMessageRTL);
+        setTimeout(() => {
+        setNameRMS('');
+        setAddressRMS('');
+        setPlaceRMS('');
+        setErrorMessageRMS('');
+      }, 5000);
       }
     }
   };
