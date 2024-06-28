@@ -24,6 +24,7 @@ function page() {
   );
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [proData, setProData] = useState<ProductData[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     async function initialize() {
@@ -105,6 +106,23 @@ function page() {
         setDiscription('');
       } catch (error) {
         console.log('Error on adding a product', error);
+        let errorMessage =
+          'Error occured on adding the proudct. please recheck the input';
+        if (error instanceof Error) {
+          const errorString = error.toString();
+          const revertMessageMatch = errorString.match(
+            /execution reverted: "(.*?)"/
+          );
+          if (revertMessageMatch) {
+            errorMessage = revertMessageMatch[1];
+          }
+        }
+        setErrorMessage(errorMessage);
+        setTimeout(() => {
+          setName('');
+          setDiscription('');
+          setErrorMessage('');
+        });
       }
     }
   };
