@@ -30,7 +30,7 @@ type RTLData = {
   name: string;
   addr: string;
   place: string;
-}
+};
 
 function Register() {
   const [contract, setContract] = useState<ethers.Contract | undefined>(
@@ -52,11 +52,11 @@ function Register() {
   const [rmsData, setRmsData] = useState<RMSData[]>([]);
   const [manData, setManData] = useState<MANData[]>([]);
   const [distData, setDistData] = useState<DSTData[]>([]);
-  const [ritData, setRitData] = useState<RTLData[]>([])
-  const [errorMessageRMS, setErrorMessageRMS] = useState<string | null>(null)
-  const [errorMessageMAN, setErrorMessageMAN] = useState<string | null>(null)
-  const [errorMessageDST, setErrorMessageDST] = useState<string | null>(null)
-  const [errorMessageRTL, setErrorMessageRTL] = useState<string | null>(null)
+  const [ritData, setRitData] = useState<RTLData[]>([]);
+  const [errorMessageRMS, setErrorMessageRMS] = useState<string | null>(null);
+  const [errorMessageMAN, setErrorMessageMAN] = useState<string | null>(null);
+  const [errorMessageDST, setErrorMessageDST] = useState<string | null>(null);
+  const [errorMessageRTL, setErrorMessageRTL] = useState<string | null>(null);
 
   useEffect(() => {
     async function initialize() {
@@ -169,9 +169,8 @@ function Register() {
             });
           }
           setRitData(allRTLSupply);
-        }
-        catch (error) {
-          console.error('Error retreiving RTL data:', error)
+        } catch (error) {
+          console.error('Error retreiving RTL data:', error);
         }
       }
     };
@@ -206,7 +205,7 @@ function Register() {
         setPlaceRMS('');
       } catch (error) {
         console.log('Error on creating raw material supplier:', error);
-         let errorMessageRMS = 'An unknown error occurred.';
+        let errorMessageRMS = ' Error occured on the inputs. please recheck the input submited.';
         if (error instanceof Error) {
           const errorString = error.toString();
           const revertMessageMatch = errorString.match(
@@ -218,11 +217,11 @@ function Register() {
         }
         setErrorMessageRMS(errorMessageRMS);
         setTimeout(() => {
-        setNameRMS('');
-        setAddressRMS('');
-        setPlaceRMS('');
-        setErrorMessageRMS('');
-      }, 5000);
+          setNameRMS('');
+          setAddressRMS('');
+          setPlaceRMS('');
+          setErrorMessageRMS('');
+        }, 5000);
       }
     }
   };
@@ -253,7 +252,7 @@ function Register() {
         setPlaceMAN('');
       } catch (error) {
         console.log('Error on registering manufacture');
-      let errorMessageMAN = 'An unknown error occurred.';
+        let errorMessageMAN = ' Error occured on the inputs. please recheck the input submited.';
         if (error instanceof Error) {
           const errorString = error.toString();
           const revertMessageMatch = errorString.match(
@@ -265,11 +264,11 @@ function Register() {
         }
         setErrorMessageMAN(errorMessageMAN);
         setTimeout(() => {
-        setNameRMS('');
-        setAddressRMS('');
-        setPlaceRMS('');
-        setErrorMessageRMS('');
-      }, 5000);
+          setNameMAN('');
+          setAddressMAN('');
+          setPlaceMAN('');
+          setErrorMessageMAN('');
+        }, 5000);
       }
     }
   };
@@ -300,7 +299,7 @@ function Register() {
         setPlaceDST('');
       } catch (error) {
         console.log('Error on registering manufacture');
-      let errorMessageDST = 'An unknown error occurred.';
+        let errorMessageDST = ' Error occured on the inputs. please recheck the input submited.';
         if (error instanceof Error) {
           const errorString = error.toString();
           const revertMessageMatch = errorString.match(
@@ -312,11 +311,11 @@ function Register() {
         }
         setErrorMessageDST(errorMessageDST);
         setTimeout(() => {
-        setNameRMS('');
-        setAddressRMS('');
-        setPlaceRMS('');
-        setErrorMessageRMS('');
-      }, 5000);
+          setNameDST('');
+          setAddressDST('');
+          setPlaceDST('');
+          setErrorMessageDST('');
+        }, 5000);
       }
     }
   };
@@ -329,14 +328,14 @@ function Register() {
         console.log('Retailer Registered. Transaction receipt:', receipt);
         window.alert('Retailer registred successfully');
 
-        const totalRTL = await contract.retailCount()
-        const totalRTLNumber = parseInt(totalRTL.toString(), 10)
-        const newRTL = [...ritData]
+        const totalRTL = await contract.retailCount();
+        const totalRTLNumber = parseInt(totalRTL.toString(), 10);
+        const newRTL = [...ritData];
         const newRTLData = {
           id: totalRTLNumber,
           name: nameRTL,
           addr: addressDST,
-          place: placeRTL
+          place: placeRTL,
         };
 
         newRTL.push(newRTLData);
@@ -347,7 +346,7 @@ function Register() {
         setPlaceRTL('');
       } catch (error) {
         console.log('Error on resitering retailer');
-      let errorMessageRTL = 'An unknown error occurred.';
+        let errorMessageRTL = ' Error occured on the inputs. please recheck the input submited.';
         if (error instanceof Error) {
           const errorString = error.toString();
           const revertMessageMatch = errorString.match(
@@ -359,11 +358,11 @@ function Register() {
         }
         setErrorMessageRTL(errorMessageRTL);
         setTimeout(() => {
-        setNameRMS('');
-        setAddressRMS('');
-        setPlaceRMS('');
-        setErrorMessageRMS('');
-      }, 5000);
+          setNameRTL('');
+          setAddressRTL('');
+          setPlaceRTL('');
+          setErrorMessageRTL('');
+        }, 5000);
       }
     }
   };
@@ -374,7 +373,7 @@ function Register() {
         <h1 className="text-3xl mx-4 font-bold my-7 mb-4">registeration</h1>
       </div>
       <div className="mb-12">
-      {errorMessageRMS && (
+        {errorMessageRMS && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
             role="alert"
@@ -428,7 +427,7 @@ function Register() {
                 <tr className="even:bg-gray-100" key={index}>
                   <td className="py-1 px-2 gap-x-2 text-center">{rms.id}</td>
                   <td className="text-center">{rms.name}</td>
-                  <td className='text-center'>{rms.place}</td>
+                  <td className="text-center">{rms.place}</td>
                   <td className="text-center">{rms.addr}</td>
                 </tr>
               ))}
@@ -437,7 +436,7 @@ function Register() {
         </div>
       </div>
       <div className="mb-12">
-       {errorMessageMAN && (
+        {errorMessageMAN && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
             role="alert"
@@ -500,7 +499,7 @@ function Register() {
         </div>
       </div>
       <div className="mb-12">
-       {errorMessageDST && (
+        {errorMessageDST && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
             role="alert"
@@ -563,6 +562,15 @@ function Register() {
         </div>
       </div>
       <div className="mb-12">
+        {errorMessageRTL && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">Error:</strong>
+              <span className="block sm:inline">{errorMessageRTL}</span>
+            </div>
+          )}
         <p className="flex justify-center bg-slate-100 font-bold py-2 text-l px-auto text center my-3">
           Register Retailer
         </p>
@@ -594,15 +602,6 @@ function Register() {
           Register Retailer
         </button>
         <div>
-         {errorMessageRTL && (
-          <div
-            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-            role="alert"
-          >
-            <strong className="font-bold">Error:</strong>
-            <span className="block sm:inline">{errorMessageRTL}</span>
-          </div>
-        )}
           <table className="mt-2 w-4/5 gap-y-5">
             <thead className="bg-slate-50 py-3 gap-x-5">
               <tr className="gap-x-5">
