@@ -61,7 +61,7 @@ function Header() {
     <div>
       <div className='w-full flex py-4 bg-zinc-600 px-20 justify justify-between'>
       <div>
-        <h1 className='text-slate-50 text-lg font-sans font-bold'>Logistic-Supply</h1>
+        <h1 className='text-slate-50 text-lg font-sans font-bold'><a href="/">Logistic-Supply</a></h1>
       </div>
       <div>
         <ul className={`text-slate-50 relative left-40 gap-y-4 ${showMenu ? 'block' : 'hidden'} sm:flex sm:gap-x-10 sm:visible`}>
