@@ -72,7 +72,7 @@ function page() {
       }
     }
     fetchProduct();
-  }, []);
+  }, [contract]);
 
   const addProduct = async () => {
     if (contract && window.ethereum !== undefined) {
