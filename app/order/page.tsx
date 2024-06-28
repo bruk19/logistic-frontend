@@ -72,7 +72,7 @@ function page() {
       }
     }
     fetchProduct();
-  }, [contract]);
+  }, []);
 
   const addProduct = async () => {
     if (contract && window.ethereum !== undefined) {
@@ -122,7 +122,7 @@ function page() {
           setName('');
           setDiscription('');
           setErrorMessage('');
-        });
+        }, 5000);
       }
     }
   };
