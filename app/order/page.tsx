@@ -24,6 +24,7 @@ function page() {
   );
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [proData, setProData] = useState<ProductData[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     async function initialize() {
@@ -71,7 +72,7 @@ function page() {
       }
     }
     fetchProduct();
-  }, [contract]);
+  }, []);
 
   const addProduct = async () => {
     if (contract && window.ethereum !== undefined) {
@@ -105,12 +106,38 @@ function page() {
         setDiscription('');
       } catch (error) {
         console.log('Error on adding a product', error);
+        let errorMessage =
+          'Error occured on adding the proudct. please recheck the input';
+        if (error instanceof Error) {
+          const errorString = error.toString();
+          const revertMessageMatch = errorString.match(
+            /execution reverted: "(.*?)"/
+          );
+          if (revertMessageMatch) {
+            errorMessage = revertMessageMatch[1];
+          }
+        }
+        setErrorMessage(errorMessage);
+        setTimeout(() => {
+          setName('');
+          setDiscription('');
+          setErrorMessage('');
+        }, 5000);
       }
     }
   };
 
   return (
     <div className="m-10">
+      {errorMessage && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <strong className="font-bold">Error:</strong>
+            <span className="block sm:inline">{errorMessage}</span>
+          </div>
+        )}
       <h1 className="text-2xl font-bold mb-2">Add Product Order</h1>
       <div>
         <input
