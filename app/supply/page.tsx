@@ -73,7 +73,8 @@ function page() {
         }
       }
     }
-    fetchProduct();
+    const interval = setInterval(fetchProduct, 5000);
+    return () => clearInterval(interval);
   }, [contract]);
 
   const moveToSupply = async () => {
@@ -82,7 +83,7 @@ function page() {
         // Check the current stage of the product
         const currentStage = await contract.showStage(id);
         console.log('Current stage:', currentStage);
-        if (currentStage === 'Medicine Ordered') {
+        if (currentStage === 'Product Ordered') {
           // Move the product to the raw material supply stage
           const tx = await contract.RMSupply(id);
           const receipt = await tx.wait();
@@ -93,7 +94,7 @@ function page() {
           window.alert(
             'The product has been added to the supplier successfully.'
           );
-          setMid('');
+          setId('');
         } else {
           window.alert(
             'The product is not in the initial stage, cannot move to supply.'
@@ -110,7 +111,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Mid);
-        if (currentStage === 'Medicine on Raw Material Supply Stage') {
+        if (currentStage === 'Product on Raw Material Supply Stage') {
           const tx = await contract.MANSupply(Mid);
           const receipt = await tx.wait();
           console.log(
@@ -120,7 +121,7 @@ function page() {
           window.alert(
             'The product has been added to the manufacture successfully.'
           );
-          setId('');
+          setMid('');
         } else {
           window.alert(
             'The product is not in the raw materail supply stage,cannot move to manufacture'
@@ -137,7 +138,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Did);
-        if (currentStage === 'Medicine on Manufacture Stage') {
+        if (currentStage === 'Product on Manufacture Stage') {
           const tx = await contract.DSTSupply(Did);
           const receipt = await tx.wait();
           console.log(
@@ -164,7 +165,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const currentStage = await contract.showStage(Rid);
-        if (currentStage === 'Medicine on Distribution Stage') {
+        if (currentStage === 'Product on Distribution Stage') {
           const tx = await contract.RTLSupply(Rid);
           const receipt = await tx.wait();
           console.log(
@@ -191,7 +192,7 @@ function page() {
     if (contract && window.ethereum !== undefined) {
       try {
         const soldProduct = await contract.showStage(Sid);
-        if (soldProduct === 'Medicine on Retail Stage') {
+        if (soldProduct === 'Product on Retail Stage') {
           const tx = await contract.sold(Sid);
           const receipt = await tx.wait();
           console.log('Product sold. Transaction receipt:', receipt);
@@ -216,8 +217,8 @@ function page() {
           Product Supply Chain Flow
         </h1>
         <h2 className="text-1xl my-3 font-bold text-center">
-          Product order -{'>'} Raw Material Supplier -{'>'} Manufacturer -{'>'}{' '}
-          Distributor -{'>'} Retailer -{'>'} Consumer
+          Product order  -{'>'} Raw Material Supplier  -{'>'} Manufacturer  -{'>'}{' '}
+          Distributor  -{'>'} Retailer  -{'>'} Consumer
         </h2>
         <table className="mt-2 w-full gap-y-5 bg-black-100 text-white">
           <thead className="bg-slate-300 py-3 gap-x-5">
