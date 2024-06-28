@@ -1,5 +1,5 @@
-import { BrowserProvider } from "ethers";
-import { AbstractProvider, ethers } from "ethers";
+import { ethers } from "ethers";
+import { AbstractProvider, BrowserProvider } from "ethers";
 
 declare global {
   interface Window {

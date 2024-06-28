@@ -39,13 +39,6 @@ function Header() {
 
   return (
     <div>
-      <div className='flex-end '>
-      {walletAddress? (
-        <p className=' text-lg font-bold mb-4 absolute mt-3 top-4 right-6 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-300 '>Account: {walletAddress.slice(0,4)}...{walletAddress.slice(walletAddress.length-4)}</p>
-      ): (
-        <button>Connect Wallet</button>
-      )}
-    </div>
       <div className='w-full flex py-4 bg-zinc-600 px-20 justify justify-between'>
       <div>
         <h1 className='text-slate-50 text-lg font-sans font-bold'>Logistic-Supply</h1>
@@ -61,6 +54,14 @@ function Header() {
       <div className='visible sm:invisible'>
         <button className='bg-white p-3' onClick={toggleMenu}>{showMenu? 'X' : "Hamburger"}</button>
       </div>
+    </div>
+    <div className='flex-end '>
+      {walletAddress? (
+        <p className=' text-lg font-bold mb-4 absolute mt-3 right-6 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-300 '>Account: {walletAddress.slice(0,4)}...{walletAddress.slice(walletAddress.length-4)}</p>
+      ): (
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >Connect Wallet</button>
+      )}
     </div>
     </div>
   )
