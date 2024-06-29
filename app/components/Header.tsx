@@ -87,7 +87,7 @@ function Header() {
           <div className='relative sm:left-20 sm:left-70'><a href="/"><Image src="/logo.png" alt="Site Logo" width={90} height={40} /></a></div>
         </div>
         <div>
-          <ul className={`text-slate-50 pt-3 text-xl relative left-40 gap-y-4 ${showMenu ? 'block' : 'hidden'} sm:flex sm:gap-x-10 sm:visible`}>
+          <ul className={`text-slate-50 pt-3 text-xl relative left-20 gap-y-4 ${showMenu ? 'block' : 'hidden'} sm:flex sm:gap-x-10 sm:visible sm:mr-10`}>
             <li><a href="/register"> Register</a></li>
             <li><a href="/order"> Order Product</a></li>
             <li><a href="/supply"> Control Supply Chain</a></li>
@@ -95,7 +95,7 @@ function Header() {
           </ul>
         </div>
         <div className='visible sm:invisible'>
-          <button className='bg-white p-3' onClick={toggleMenu}>{showMenu? 'X' : "Hamburger"}</button>
+          <button onClick={toggleMenu}>{showMenu? 'X' :(<Image src="/humber.png" alt="Site Logo" width={70} height={30} />) }</button>
         </div>
       </div>
       <div className='flex-end '>
