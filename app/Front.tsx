@@ -3,7 +3,7 @@ import React from 'react'
 function Front() {
   return (
     <div>
-      <h1 className='text-3xl text-center font-bold mt-6'>Product Supply Chain Flows</h1>
+      <h1 className='text-3xl text-center font-bold mt-14'>Product Supply Chain Flows</h1>
       <div>
         <div className='mt-5 bg-gray-300 p-4 rounded-md w-4/5 mx-auto'>
         <h2 className='text-xl font-bold'>Step1:Owner should register Raw Material Supplieres, Manufacturers, Distributors and Retailers</h2>

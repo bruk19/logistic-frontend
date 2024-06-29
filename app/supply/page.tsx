@@ -211,7 +211,7 @@ function page() {
   };
 
   return (
-    <div className="w-full mt-6">
+    <div className="w-full mt-12">
       <div>
         <h1 className="text-3xl my-3 font-bold text-center">
           Product Supply Chain Flow
